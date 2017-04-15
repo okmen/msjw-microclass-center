@@ -1,4 +1,4 @@
-package cn.microclass.service.impl;
+/*package cn.microclass.service.impl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,20 +14,21 @@ import cn.microclass.bean.Token;
 import cn.microclass.bean.UserOpenidBean;
 import cn.microclass.bean.UserRegInfo;
 import cn.microclass.bean.WechatUserInfoBean;
+import cn.microclass.bean.studyclassroom.Study;
 import cn.microclass.cached.impl.IAccountCachedImpl;
 import cn.microclass.config.IConfig;
 import cn.microclass.dao.IAccountDao;
 import cn.microclass.orm.DeviceORM;
 import cn.microclass.orm.UsernameORM;
-import cn.microclass.service.IAccountService;
+import cn.microclass.service.IMicroclassServer;
 import cn.microclass.utils.RandomUtils;
 import cn.microclass.utils.TokenGenerater;
 import cn.sdk.util.StringUtil;
 
-import com.alibaba.dubbo.common.utils.StringUtils;
+import com.alibaba.dubbo.common.utils.StringUtils;*/
 
-@Service("microclassService")
-public class IAccountServiceImpl implements IAccountService {
+//@Service("microclassService")
+/*public class IAccountServiceImpl implements IMicroclassServer {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
 	@Autowired
@@ -81,7 +82,15 @@ public class IAccountServiceImpl implements IAccountService {
             throw e;
         }
         return list;
-	};
+	}
+
+
+
+	@Override
+	public List<Study> findUser(Study study) {
+		// TODO Auto-generated method stub
+		return null;
+	};*/
 
 	
 //	@Override
@@ -339,4 +348,4 @@ public class IAccountServiceImpl implements IAccountService {
 //        return updateSuccess;
 //    }
 
-}
+//}

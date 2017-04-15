@@ -9,7 +9,7 @@ public class Provider {
 	public static void main(String[] args) {
 		context = new ClassPathXmlApplicationContext(new String[] { "provider.xml" });
 		context.start();
-		System.out.println("---账号中心服务，启动---");
+		System.out.println("---微课堂服务，启动---");
 		while (true) {
 			try {
 				Thread.sleep(1000);

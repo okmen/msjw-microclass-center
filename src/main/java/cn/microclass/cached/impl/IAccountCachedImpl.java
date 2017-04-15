@@ -1,4 +1,4 @@
-package cn.microclass.cached.impl;
+/*package cn.microclass.cached.impl;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -21,6 +21,8 @@ import cn.sdk.serialization.ISerializeManager;
 @Service
 public class IAccountCachedImpl implements IAccountCached{
 	protected Logger log = Logger.getLogger(this.getClass());
+	
+	
 	
     
     @Value("${refreshTokenTime}")
@@ -136,4 +138,78 @@ public class IAccountCachedImpl implements IAccountCached{
         }
     }
 
+
+	public Logger getLog() {
+		return log;
+	}
+
+
+	public void setLog(Logger log) {
+		this.log = log;
+	}
+
+
+	
+
+
+	public int getRefreshTokenTime() {
+		return refreshTokenTime;
+	}
+
+
+	public void setRefreshTokenTime(int refreshTokenTime) {
+		this.refreshTokenTime = refreshTokenTime;
+	}
+
+
+	public int getEncyptAccessTokenTime() {
+		return encyptAccessTokenTime;
+	}
+
+
+	public void setEncyptAccessTokenTime(int encyptAccessTokenTime) {
+		this.encyptAccessTokenTime = encyptAccessTokenTime;
+	}
+
+
+	public int getAccessTokenTime() {
+		return accessTokenTime;
+	}
+
+
+	public void setAccessTokenTime(int accessTokenTime) {
+		this.accessTokenTime = accessTokenTime;
+	}
+
+
+	public ICacheManger<String> getCacheManger() {
+		return cacheManger;
+	}
+
+
+	public void setCacheManger(ICacheManger<String> cacheManger) {
+		this.cacheManger = cacheManger;
+	}
+
+
+	public ICacheManger<Object> getObjectcacheManger() {
+		return objectcacheManger;
+	}
+
+
+	public void setObjectcacheManger(ICacheManger<Object> objectcacheManger) {
+		this.objectcacheManger = objectcacheManger;
+	}
+
+
+	public ISerializeManager<Map<String, String>> getSerializeManager() {
+		return serializeManager;
+	}
+
+
+	public void setSerializeManager(ISerializeManager<Map<String, String>> serializeManager) {
+		this.serializeManager = serializeManager;
+	}
+
 }
+*/

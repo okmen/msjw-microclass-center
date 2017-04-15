@@ -4,6 +4,7 @@ import java.util.List;
 import cn.microclass.bean.UserOpenidBean;
 import cn.microclass.bean.UserRegInfo;
 import cn.microclass.bean.WechatUserInfoBean;
+import cn.microclass.bean.studyclassroom.Study;
 import cn.microclass.orm.DeviceORM;
 import cn.microclass.orm.UsernameORM;
 
@@ -21,7 +22,6 @@ public interface IAccountDao {
 	
 	List<WechatUserInfoBean> getAllWechatUserInfoBeanList();
 	
-
 	/**
 	 * 插入微信用户信息
 	 * 
@@ -109,6 +109,8 @@ public interface IAccountDao {
      * @return
      */
     public boolean updateDevice(String deviceUuid,int osType,long userId);
+    
+    
     
 
 }

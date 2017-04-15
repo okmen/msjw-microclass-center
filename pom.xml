@@ -129,7 +129,7 @@
 				<microclass.center.api.version>1.0.0-SNAPSHOT</microclass.center.api.version>
 				
 				<dubbo.registry.url><![CDATA[192.168.1.120:2181]]></dubbo.registry.url>
-				<dubbo.provider.port><![CDATA[30100]]></dubbo.provider.port>
+				<dubbo.provider.port><![CDATA[30500]]></dubbo.provider.port>
 				<dubbo.provider.timeout><![CDATA[5000]]></dubbo.provider.timeout>
 				<dubbo.monitor.address><![CDATA[192.168.1.120:7070]]></dubbo.monitor.address>
 
@@ -158,6 +158,13 @@
 				<log4j.socket.host><![CDATA[192.168.1.120]]></log4j.socket.host>
 				<log4j.socket.port><![CDATA[10005]]></log4j.socket.port>
 				<isMWuserResultsTaskNeed>0</isMWuserResultsTaskNeed>
+				
+				<!-- 警司通参数 -->
+				<jiaojing.userid>WX02</jiaojing.userid>
+				<jiaojing.userpwd>WX02@168</jiaojing.userpwd>
+				<jiaojing.url>http://123.56.180.216:19002/xxfbpt/services/xxfbptservice</jiaojing.url>
+				<jiaojing.method>xxptSchuding</jiaojing.method>
+				<jiaojing.key>94D863D9BE7FB032E6A19430CC892610</jiaojing.key>
 			</properties>
 		</profile>
 
@@ -176,7 +183,7 @@
 				<sdk.version>1.0.0-SNAPSHOT</sdk.version>
 				<microclass.center.api.version>1.0.0-SNAPSHOT</microclass.center.api.version>
 				<dubbo.registry.url><![CDATA[test-zookeeper.choumei.me:2181]]></dubbo.registry.url>
-				<dubbo.provider.port><![CDATA[30000]]></dubbo.provider.port>
+				<dubbo.provider.port><![CDATA[30500]]></dubbo.provider.port>
 				<dubbo.provider.timeout><![CDATA[5000]]></dubbo.provider.timeout>
 				<dubbo.monitor.address><![CDATA[test-monitor.choumei.me:7070]]></dubbo.monitor.address>
 
@@ -203,6 +210,13 @@
 				<log4j.socket.host><![CDATA[test-logserver.choumei.me]]></log4j.socket.host>
 				<log4j.socket.port><![CDATA[10003]]></log4j.socket.port>
 				<isMWuserResultsTaskNeed>0</isMWuserResultsTaskNeed>
+				
+				<!-- 警司通参数 -->
+				<jiaojing.userid>WX02</jiaojing.userid>
+				<jiaojing.userpwd>WX02@168</jiaojing.userpwd>
+				<jiaojing.url>http://123.56.180.216:19002/xxfbpt/services/xxfbptservice</jiaojing.url>
+				<jiaojing.method>xxptSchuding</jiaojing.method>
+				<jiaojing.key>94D863D9BE7FB032E6A19430CC892610</jiaojing.key>
 			</properties>
 		</profile>
 		
