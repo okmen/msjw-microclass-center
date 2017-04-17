@@ -18,6 +18,7 @@ import com.alibaba.fastjson.JSONObject;
 import cn.microclass.bean.WechatUserInfoBean;
 import cn.microclass.bean.studyclassroom.Answeroptions;
 import cn.microclass.bean.studyclassroom.Study;
+import cn.microclass.bean.studyclassroom.StudyRecord;
 import cn.microclass.cached.impl.IMicroclassCachedImpl;
 import cn.microclass.service.IMicroclassServer;
 import cn.sdk.bean.BaseBean;
@@ -80,7 +81,6 @@ public class IMicroclassServiceImpl implements IMicroclassServer {
 		BaseBean base=new BaseBean();
 		List<BaseBean>list=new ArrayList<>();
 		List<Study>studyList=new ArrayList<>();
-		String x = "<?xml version=\"1.0\" encoding=\"utf-8\"?><request><head><sfzmhm>431022199612250036</sfzmhm><sjhm>17708404197</sjhm><ip>123.56.180.216</ip><yhly>C</yhly></head></request>";
 		String xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?><request><head><sfzmhm>"+s.getIdentityCard()+"</sfzmhm>"
 				+ "<sjhm>"+s.getMobilephone()+"</sjhm><ip>"+s.getIpAddress()+"</ip><yhly>"+s.getUserSource()+"</yhly></head></request>";
 
@@ -103,6 +103,8 @@ public class IMicroclassServiceImpl implements IMicroclassServer {
 				//Answeroptions answer=new Answeroptions();	
 				s.setSubjectName(body.getString("qt_tm").toString());
 				s.setUserName(body.getString("true_name").toString());
+				s.setTestQuestionsType(null !=body.getString("qt_stlx")?body.getString("qt_stlx").toString():"");  //图片
+				s.setSubjectImg(null !=body.getString("qt_tp")?body.getString("qt_tp").toString():"");
 				if(body.getString("qt_tmlb").toString().equals("文字题")){ //1.代表文字题，2代表图片题
 					s.setSubjecttype(1);
 				}else{
@@ -112,9 +114,6 @@ public class IMicroclassServiceImpl implements IMicroclassServer {
 			}else{
 				base.setMsg(head.get("fhz-msg").toString());
 			}
-			System.out.println("取题答案"+s.getCode());
-			System.out.println("积分周期开始时间=="+s.getScoreStartDate());
-			System.out.println("记分周期结束时间=="+s.getScoreEndDate());
 			studyList.add(s);
 			base.setData(studyList);
 			list.add(base);
@@ -126,9 +125,7 @@ public class IMicroclassServiceImpl implements IMicroclassServer {
 	}
 
 	
-	int answererror=0; //答题错数
-	int surplusAnswe=0; //答题对数
-	int answerCount=20; //一共就20题目,答完就没了
+
 	/**
 	 *消分学习答题： 接口exam002
 	 */
@@ -136,42 +133,19 @@ public class IMicroclassServiceImpl implements IMicroclassServer {
 	public List<BaseBean> xfAnswerQuey(Study s) {
 		List<BaseBean>list=new ArrayList<>();
 		BaseBean base=new BaseBean();
-		List<Study>studyList=new ArrayList<>();
-	
-		String xml="<?xml version=\"1.0\" encoding=\"utf-8\"?><request><head><id>3622517</id><true_name>"+s.getUserName()+"</true_name>"
-				+ "<sfzmhm>"+s.getIdentityCard()+"</sfzmhm><sjhm>"+s.getMobilephone()+"</sjhm><ip>"+s.getIpAddress()+"</ip><dt_qd>C</dt_qd>"
-				+ "<dt_sj>"+s.getAnswerDateTime()+"</dt_sj><dt_da>"+s.getSubjectAnswer()+"</dt_da><jfzq_start>"+s.getScoreStartDate()+"</jfzq_start>"
-				+ "<jfzq_end>"+s.getScoreEndDate()+"</jfzq_end></head></request>";
+		List<Study>studyList=new ArrayList<>();		
+		String xx="<?xml version=\"1.0\" encoding=\"utf-8\"?><request><head><id>"+s.getSubjectId()+"</id><true_name>"+s.getUserName()+"</true_name>"
+				+ "<sfzmhm>"+s.getIdentityCard()+"</sfzmhm><sjhm>"+s.getMobilephone()+"</sjhm><ip>"+s.getIpAddress()+"</ip><dt_qd>"+s.getUserSource()+"</dt_qd>"
+				+ "<dt_sj>"+s.getAnswerDateTime()+"</dt_sj><dt_da>"+s.getSubjectAnswer()+"</dt_da><jfzq_start>"+s.getScoreStartDate()+"</jfzq_start><jfzq_end>"+s.getScoreEndDate()+"</jfzq_end></head></request>";
 		try {
 			String interfaceNumber = s.getInterfaceId();  //获取取题接口编号
 			JSONObject respStr =WebServiceClient.getInstance().requestWebService(iMicroclassCached.getUrl(), iMicroclassCached.getMethod(), 
-					interfaceNumber,xml,iMicroclassCached.getUserid(),iMicroclassCached.getUserpwd(),iMicroclassCached.getKey());
+					interfaceNumber,xx,iMicroclassCached.getUserid(),iMicroclassCached.getUserpwd(),iMicroclassCached.getKey());
 			System.out.println("center实现层次返回=="+respStr);
 			JSONObject body=respStr.getJSONObject("body");
 			JSONObject head=respStr.getJSONObject("head");
 			base.setCode(head.get("fhz").toString());
-			if(answerCount>=1){
-				if(base.getCode().equals("0000")){
-					surplusAnswe++;   //答题对的时候 答题对数+1；
-					answerCount--;    //答对的后 剩余题数-1;
-					base.setMsg(head.get("fhz-msg").toString());
-				}else if(base.getCode().equals("0001")){
-					answererror++;   //答题错误的时候 答题错数+1；
-					answerCount--;   //答题错误的时候 剩余题数-1;
-					base.setMsg(head.get("fhz-msg").toString());
-				}else{
-					base.setMsg(head.get("fhz-msg").toString());
-				}
-				s.setSurplusAnswe(answerCount);  //剩余题数
-				s.setAnswererror(answererror);   //答题错数
-				s.setAnswerCorrect(surplusAnswe); //答题对数
-			}else{
-				s.setAnswerState(3); //已经答满20题了,不能继续答题了
-				answererror=0;
-				surplusAnswe=0;
-				answerCount=20;
-			}
-			
+			base.setMsg(head.get("fhz-msg").toString());
 			studyList.add(s);
 			base.setData(studyList);
 			list.add(base);
@@ -192,9 +166,7 @@ public class IMicroclassServiceImpl implements IMicroclassServer {
 		List<BaseBean>list=new ArrayList<>();
 		BaseBean base=new BaseBean();
 		List<Study>studyList=new ArrayList<>();
-		List<Study>studyLists=new ArrayList<>();
-		
-	
+		List<StudyRecord>studyrecordList=new ArrayList<>();
 		String xfxx="<?xml version=\"1.0\" encoding=\"utf-8\"?>"
 				+ "<request><head><sfzmhm>"+s.getIdentityCard()+"</sfzmhm>"
 				+ "<sjhm>"+s.getMobilephone()+"</sjhm><ywlx>"+s.getServiceType()+"</ywlx><ip>"+s.getIpAddress()+"</ip><yhly>"+s.getUserSource()+"</yhly></head></request>";
@@ -202,7 +174,7 @@ public class IMicroclassServiceImpl implements IMicroclassServer {
 		try {
 			String interfaceNumber = s.getInterfaceId();  //获取取题接口编号
 			JSONObject respStr =WebServiceClient.getInstance().requestWebService(iMicroclassCached.getUrl(), iMicroclassCached.getMethod(), 
-					interfaceNumber,xfxx,iMicroclassCached.getUserid(),iMicroclassCached.getUserpwd(),iMicroclassCached.getKey());
+			interfaceNumber,xfxx,iMicroclassCached.getUserid(),iMicroclassCached.getUserpwd(),iMicroclassCached.getKey());
 			System.out.println("center实现层次返回=="+respStr);
 			JSONObject body=respStr.getJSONObject("body"); //获取json中body
 			JSONObject head=respStr.getJSONObject("head"); //获取json中head
@@ -210,15 +182,15 @@ public class IMicroclassServiceImpl implements IMicroclassServer {
 			JSONArray examlist= body.getJSONArray("examlist");  //从json中body获取examlist这个集合
 			System.out.println(examlist);
 			for(int i=0;i<examlist.size();i++){
+				StudyRecord studyrecord=new StudyRecord();
 				JSONObject ob= examlist.getJSONObject(i);
-				System.out.println("ket=="+ob);
-				String ddts=ob.get("ddts").toString();
-				System.out.println("ddts=="+ddts);
-				s.setAnswerCorrect(Integer.valueOf(ob.get("ddts").toString()));
-				s.setAnswerDate(ob.get("dtrq").toString());
-				studyLists.add(s);
-				
+				studyrecord.setAnsLogarithm(Integer.valueOf(ob.get("ddts").toString()));
+				studyrecord.setAnswerDate(ob.get("dtrq").toString());	
+				studyrecord.setAnswerBatch(ob.get("dtpc").toString());
+				studyrecord.setIsComplete(null != ob.get("dtjg")?ob.get("dtjg").toString():"");	
+				studyrecordList.add(studyrecord);
 			}
+			s.setStudyRecord(studyrecordList);
 			
 			if(base.getCode().equals("0000")){  //返回0000代表成功 
 				s.setAnswerState(1);
@@ -230,7 +202,6 @@ public class IMicroclassServiceImpl implements IMicroclassServer {
 			}
 			studyList.add(s);
 			base.setData(studyList);
-			base.setData(studyLists);
 			list.add(base);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -246,9 +217,50 @@ public class IMicroclassServiceImpl implements IMicroclassServer {
 		List<BaseBean>list=new ArrayList<>();
 		BaseBean base=new BaseBean();
 		List<Study>studyList=new ArrayList<>();
+		String xml="<?xml version=\"1.0\" encoding=\"utf-8\"?>"
+				+ "<request><head><sfzmhm>"+s.getIdentityCard()+"</sfzmhm>"
+				+ "<sjhm>"+s.getMobilephone()+"</sjhm><ywlx>"+s.getServiceType()+"</ywlx><ip>"+s.getIpAddress()+"</ip><yhly>"+s.getUserSource()+"</yhly></head></request>";
 		
+		String interfaceNumber = s.getInterfaceId();  //获取取题接口编号
+		try {		
+			JSONObject respStr =WebServiceClient.getInstance().requestWebService(iMicroclassCached.getUrl(), iMicroclassCached.getMethod(), 
+					interfaceNumber,xml,iMicroclassCached.getUserid(),iMicroclassCached.getUserpwd(),iMicroclassCached.getKey());
+			System.out.println("center实现层次返回=="+respStr);
+			JSONObject body=respStr.getJSONObject("body");
+			JSONObject head=respStr.getJSONObject("head");
+			base.setCode(head.get("fhz").toString());
+			//s.setCode(body.get("xx_a").toString());
+			if(base.getCode().equals("0000")){  //返回0000代表成功 
+				s.setSubjectId(body.get("id").toString());
+				s.setIdentityCard(body.get("jszhm").toString());
+				s.setAnswerDateTime(body.get("qt_sj").toString());
+				s.setTestQuestionsType(body.get("qt_stlx").toString());
+				s.setSubjectName(body.get("qt_tm").toString());
+				if(body.get("qt_tmlb").toString().equals("文字题")){
+					s.setSubjecttype(1);
+				}else{
+					s.setSubjecttype(2);
+				}
+				s.setUserName(body.get("true_name").toString());
+				s.setAnswerA(null!=body.get("xx_a")?body.get("xx_a").toString():"");
+				s.setAnswerB(null!=body.get("xx_b")?body.get("xx_b").toString():"");
+				s.setAnswerC(null !=body.get("xx_c")?body.get("xx_c").toString():"");
+				s.setAnswerD(null !=body.get("xx_d")?body.get("xx_d").toString():"");
+				s.setServiceType(body.get("ywlx").toString());
+				System.err.println("A=="+s.getAnswerA());
+				System.err.println("B=="+s.getAnswerB());
+				base.setMsg(head.get("fhz-msg").toString());	
+			}else{
+				base.setMsg(head.get("fhz-msg").toString());
+			}
+			studyList.add(s);
+			base.setData(studyList);
+			list.add(base);
+		} catch (Exception e) {
 		
-		return null;
+			e.printStackTrace();
+		}
+		return list;
 	}
 	
 	/**
@@ -256,19 +268,43 @@ public class IMicroclassServiceImpl implements IMicroclassServer {
 	 */
 	@Override
 	public List<BaseBean> xrAnswerQuey(Study s) {
-		// TODO Auto-generated method stub
-		return null;
+		List<BaseBean>list=new ArrayList<>();
+		BaseBean base=new BaseBean();
+		List<Study>studyList=new ArrayList<>();
+		String xml="<?xml version=\"1.0\" encoding=\"utf-8\"?><request><head><id>"+s.getSubjectId()+"</id>"
+				+ "<sfzmhm>"+s.getIdentityCard()+"</sfzmhm><sjhm>"+s.getMobilephone()+"</sjhm><ywlx>AQ</ywlx><ip>"+s.getIpAddress()+"</ip><dt_qd>"+s.getUserSource()+"</dt_qd>"
+				+ "<dt_da>"+s.getSubjectAnswer()+"</dt_da></head></request>";
+		String interfaceNumber = s.getInterfaceId();  //获取取题接口编号
+		try {		
+			JSONObject respStr =WebServiceClient.getInstance().requestWebService(iMicroclassCached.getUrl(), iMicroclassCached.getMethod(), 
+					interfaceNumber,xml,iMicroclassCached.getUserid(),iMicroclassCached.getUserpwd(),iMicroclassCached.getKey());
+			System.out.println("center实现层次返回=="+respStr);
+			JSONObject body=respStr.getJSONObject("body");
+			JSONObject head=respStr.getJSONObject("head");
+			if(head.get("fhz").toString().equals("0002")){
+				base.setCode(head.get("fhz").toString());
+				base.setMsg(head.get("fhz-msg").toString());   //返回答题错误  或者答题正确
+			}else{
+				s.setAnswererror(Integer.valueOf(head.get("dcts").toString()));  //答题错误题数
+				s.setAnswerCorrect(Integer.valueOf(head.get("ddts").toString()));  //答对题数
+				base.setCode(head.get("fhz").toString());
+				base.setMsg(head.get("fhz-msg").toString());   //返回答题错误  或者答题正确
+				s.setBatchResult(head.get("pcjg").toString());
+				s.setSurplusAnswe(Integer.valueOf(head.get("syts").toString())); //剩余题数
+				s.setServiceType(head.get("ywlx").toString()); //业务类型
+			}
+				
+			studyList.add(s);
+			base.setData(studyList);
+			list.add(base);
+		} catch (Exception e) {
+		
+			e.printStackTrace();
+		}
+		
+		return list;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 
-	
 	
 	public  void timer4(Study s) {
 	    Calendar calendar = Calendar.getInstance();

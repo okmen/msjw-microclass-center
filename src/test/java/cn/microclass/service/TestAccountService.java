@@ -37,16 +37,7 @@ public class TestAccountService {
     private IMicroclassServer microclassService;
     
 	
-	@Test
-	public void testXfStudyAnswer() {
-		Study  s=new Study();
-		s.setInterfaceId("exam001");
-		s.setIdentityCard("622822198502074110");
-		s.setMobilephone("15920071829");
-		s.setIpAddress("123.56.180.216");
-		s.setUserSource("C");
-		 microclassService.xfStudyAnswer(s);
-	}
+ 
 	/**
 	 * 消分业务相关查询
 	 */
@@ -65,6 +56,41 @@ public class TestAccountService {
 			System.out.println(b.getData());
 		}
 	}
+	    /**
+		 * 消分业务随机取题
+		 */
+		@Test
+		public void testXfStudyAnswer() {
+			Study  s=new Study();
+			s.setInterfaceId("exam001");
+			s.setIdentityCard("431022199612250036");
+			s.setMobilephone("17708404197");
+			s.setIpAddress("123.56.180.216");
+			s.setUserSource("C");
+			 microclassService.xfStudyAnswer(s);
+		}
+		/**
+		 * 消分业务答题
+		 */
+		@Test
+		public void xfAnswerQuey(){
+			Study  s=new Study();
+			s.setInterfaceId("exam002");
+			s.setSubjectId("3861909");  //取题ID
+			s.setUserName("曾令成");		
+			s.setIdentityCard("431022199612250036"); //身份证号码
+			s.setMobilephone("17708404197"); //手机号码
+			s.setIpAddress("123.56.180.216"); //答题IP地址
+			s.setSubjectAnswer("A"); //答题答案 
+			s.setAnswerDateTime("2017-04-17 10:59:49");
+			s.setScoreStartDate("2016-07-09"); //取题时的计分周期始
+			s.setScoreEndDate("2017-07-09"); //取题时的计分周期末
+			s.setUserSource("C");
+			 microclassService.xfAnswerQuey(s);
+		}
+		
+		
+	
 	/**
 	 * 6.34.3	行人、非机动车驾驶人道路交通安全学习查询接口 
 	 */
@@ -80,8 +106,35 @@ public class TestAccountService {
 	    microclassService.xrStudyQuery(s);
 	}
 	
-
-
-
+	/**
+	 * 6.34.3	行人、非机动车驾驶人道路交通安全学习随机取题
+	 */
+	@Test
+	public void xrStudyAnswer(){
+		Study  s=new Study();
+		s.setInterfaceId("DDC3001");
+		s.setIdentityCard("431022199612250036");
+		s.setMobilephone("17708404197");
+		s.setServiceType("AQ");
+		s.setIpAddress("123.56.180.216");
+		s.setUserSource("C");
+		microclassService.xrStudyAnswer(s);
+	}
+	/**
+	 * 行人、非机动车驾驶人道路交通安全学习 答题接口
+	 */
+	@Test
+	public void xrAnswerQuey(){
+		Study  s=new Study();
+		s.setInterfaceId("DDC3002");
+		s.setSubjectId("6910099");
+		s.setIdentityCard("431022199612250036");
+		s.setMobilephone("17708404197");
+		s.setServiceType("AQ");
+		s.setIpAddress("123.56.180.216");
+		s.setUserSource("C");
+		s.setSubjectAnswer("A");
+		microclassService.xrAnswerQuey(s);
+	}
     
 }
