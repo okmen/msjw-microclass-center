@@ -101,7 +101,6 @@ public class IMicroclassServiceImpl implements IMicroclassServer {
 				s.setScoreEndDate(body.get("jfzq_end").toString());
 				s.setAnswerDateTime(body.get("qt_sj").toString());
 				s.setTestQuestionsType(body.get("qt_stlx").toString());
-				//Answeroptions answer=new Answeroptions();	
 				s.setSubjectName(body.getString("qt_tm").toString());
 				s.setUserName(body.getString("true_name").toString());
 				s.setTestQuestionsType(null !=body.getString("qt_stlx")?body.getString("qt_stlx").toString():"");  //图片
@@ -120,12 +119,7 @@ public class IMicroclassServiceImpl implements IMicroclassServer {
 					anser2.setAnswerName("错误");
 					anserList.add(anser2);
 					
-				}else{
-					/*s.setAnswerA(null!=body.get("xx_a")?body.get("xx_a").toString():"");
-					s.setAnswerB(null!=body.get("xx_b")?body.get("xx_b").toString():"");
-					s.setAnswerC(null !=body.get("xx_c")?body.get("xx_c").toString():"");
-					s.setAnswerD(null !=body.get("xx_d")?body.get("xx_d").toString():"");*/
-					
+				}else{				
 					Object answerA=body.get("xx_a");
 					Object answerB=body.get("xx_b");
 					Object answerC=body.get("xx_c");
@@ -157,6 +151,9 @@ public class IMicroclassServiceImpl implements IMicroclassServer {
 				}
 				s.setAnsweroptions(anserList);
 				base.setMsg(head.get("fhz-msg").toString());	
+			}else if(base.getCode().equals("0001")){  //当返回0001的时候代表今日已经答了10题了 不能继续答题了！
+				s.setAnswerState(0);
+				base.setMsg(head.get("fhz-msg").toString());
 			}else{
 				base.setMsg(head.get("fhz-msg").toString());
 			}
@@ -192,6 +189,7 @@ public class IMicroclassServiceImpl implements IMicroclassServer {
 			JSONObject head=respStr.getJSONObject("head");
 			base.setCode(head.get("fhz").toString());
 			base.setMsg(head.get("fhz-msg").toString());
+			s.setAnswerDate(s.getAnswerDate());  //答题时间 格式YYYY-MM-DD
 			studyList.add(s);
 			base.setData(studyList);
 			list.add(base);
@@ -299,11 +297,6 @@ public class IMicroclassServiceImpl implements IMicroclassServer {
 					anserList.add(anser2);
 					
 				}else{
-					/*s.setAnswerA(null!=body.get("xx_a")?body.get("xx_a").toString():"");
-					s.setAnswerB(null!=body.get("xx_b")?body.get("xx_b").toString():"");
-					s.setAnswerC(null !=body.get("xx_c")?body.get("xx_c").toString():"");
-					s.setAnswerD(null !=body.get("xx_d")?body.get("xx_d").toString():"");*/
-					
 					Object answerA=body.get("xx_a");
 					Object answerB=body.get("xx_b");
 					Object answerC=body.get("xx_c");
@@ -381,6 +374,7 @@ public class IMicroclassServiceImpl implements IMicroclassServer {
 				s.setSurplusAnswe(Integer.valueOf(head.get("syts").toString())); //剩余题数
 				s.setServiceType(head.get("ywlx").toString()); //业务类型
 				s.setTrainResult(null !=head.get("pxjg")?head.get("pxjg").toString():"");  //接收培训结果
+				s.setAnswerDate(s.getAnswerDate());  //答题时间 格式YYYY-MM-DD
 			}
 				
 			studyList.add(s);
@@ -470,6 +464,7 @@ public class IMicroclassServiceImpl implements IMicroclassServer {
 				s.setTestQuestionsType(body.get("qt_stlx").toString());  //选择题或者判断题
 				s.setSubjectName(body.get("qt_tm").toString());
 				s.setSubjectImg(null !=body.get("qt_tp")?body.get("qt_tp").toString():""); //取题图片
+				
 				if(body.getString("qt_stlx").toString().equals("判断题")){
 					Answeroptions anser1=new Answeroptions();
 					anser1.setAnswerId("A");
@@ -480,12 +475,7 @@ public class IMicroclassServiceImpl implements IMicroclassServer {
 					anser2.setAnswerName("错误");
 					anserList.add(anser2);
 					
-				}else{
-					/*s.setAnswerA(null!=body.get("xx_a")?body.get("xx_a").toString():"");
-					s.setAnswerB(null!=body.get("xx_b")?body.get("xx_b").toString():"");
-					s.setAnswerC(null !=body.get("xx_c")?body.get("xx_c").toString():"");
-					s.setAnswerD(null !=body.get("xx_d")?body.get("xx_d").toString():"");*/
-					
+				}else{					
 					Object answerA=body.get("xx_a");
 					Object answerB=body.get("xx_b");
 					Object answerC=body.get("xx_c");
@@ -562,6 +552,7 @@ public class IMicroclassServiceImpl implements IMicroclassServer {
 				base.setMsg(head.get("fhz-msg").toString());   //返回答题错误  或者答题正确
 				s.setBatchResult(head.get("pcjg").toString());
 				s.setSurplusAnswe(Integer.valueOf(head.get("syts").toString())); //剩余题数
+				s.setAnswerDate(s.getAnswerDate());  //答题时间 格式YYYY-MM-DD
 				/*if(s.getBatchResult().equals("不合格")||s.getBatchResult().equals("合格")){
 					
 					return list;
@@ -654,14 +645,12 @@ public class IMicroclassServiceImpl implements IMicroclassServer {
 			JSONObject body=respStr.getJSONObject("body");
 			JSONObject head=respStr.getJSONObject("head");
 			base.setCode(head.get("fhz").toString());
-			//s.setCode(body.get("xx_a").toString());
 			if(base.getCode().equals("0000")){  //返回0000代表成功 
 				s.setSubjectId(body.get("id").toString());
 				s.setScoreStartDate(body.get("jfzq_start").toString());
 				s.setScoreEndDate(body.get("jfzq_end").toString());
 				s.setAnswerDateTime(body.get("qt_sj").toString());
 				s.setTestQuestionsType(body.get("qt_stlx").toString());
-				//Answeroptions answer=new Answeroptions();	
 				s.setSubjectName(body.getString("qt_tm").toString());
 				s.setUserName(body.getString("true_name").toString());
 				s.setTestQuestionsType(null !=body.getString("qt_stlx")?body.getString("qt_stlx").toString():"");  //图片
@@ -674,13 +663,7 @@ public class IMicroclassServiceImpl implements IMicroclassServer {
 					anser2.setAnswerId("B");
 					anser2.setAnswerName("错误");
 					anserList.add(anser2);
-					
-				}else{
-					/*s.setAnswerA(null!=body.get("xx_a")?body.get("xx_a").toString():"");
-					s.setAnswerB(null!=body.get("xx_b")?body.get("xx_b").toString():"");
-					s.setAnswerC(null !=body.get("xx_c")?body.get("xx_c").toString():"");
-					s.setAnswerD(null !=body.get("xx_d")?body.get("xx_d").toString():"");*/
-					
+				}else{					
 					Object answerA=body.get("xx_a");
 					Object answerB=body.get("xx_b");
 					Object answerC=body.get("xx_c");
@@ -745,6 +728,7 @@ public class IMicroclassServiceImpl implements IMicroclassServer {
 			JSONObject head=respStr.getJSONObject("head");
 			s.setTrainResult(null !=head.get("pxjg")?head.get("pxjg").toString():"");  //接收培训结果
 			s.setBatchResult(null !=head.get("pcjg")?head.get("pcjg").toString():"");  //批次结果
+			s.setAnswerDate(s.getAnswerDate());  //答题时间 格式YYYY-MM-DD
 			base.setCode(head.get("fhz").toString());
 			base.setMsg(head.get("fhz-msg").toString());
 			studyList.add(s);
@@ -921,6 +905,7 @@ public class IMicroclassServiceImpl implements IMicroclassServer {
 			JSONObject body=respStr.getJSONObject("body");
 			JSONObject head=respStr.getJSONObject("head");
 			s.setBatchResult(null !=head.get("pcjg")?head.get("pcjg").toString():"");  //批次结果
+			s.setAnswerDate(s.getAnswerDate());  //答题时间 格式YYYY-MM-DD
 			base.setCode(head.get("fhz").toString());
 			base.setMsg(head.get("fhz-msg").toString());
 			studyList.add(s);
@@ -976,8 +961,6 @@ public class IMicroclassServiceImpl implements IMicroclassServer {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
 		return list;
 	}
 
