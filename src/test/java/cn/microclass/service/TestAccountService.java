@@ -123,7 +123,7 @@ public class TestAccountService {
 	/**
 	 * 行人、非机动车驾驶人道路交通安全学习 答题接口
 	 */
-	@Test
+	@Test		
 	public void xrAnswerQuey(){
 		Study  s=new Study();
 		s.setInterfaceId("DDC3002");
@@ -136,5 +136,111 @@ public class TestAccountService {
 		s.setSubjectAnswer("A");
 		microclassService.xrAnswerQuey(s);
 	}
+	
+	/**
+	 * 电动车违法查询
+	 */
+	@Test
+	public void  ddcStudyQuery(){
+		Study  s=new Study();
+		s.setInterfaceId("DDC2003");
+		s.setIdentityCard("431022199612250036");
+		s.setMobilephone("17708404197");
+		s.setServiceType("BA");
+		s.setDecisionId("12345");
+		s.setIpAddress("123.56.180.216");
+		s.setUserSource("C");
+		microclassService.ddcStudyQuery(s);
+	}
+	
+	
+	/**
+	 * 电动车违法随机取题
+	 */
+	@Test
+	public void ddcStudyAnswer(){
+		Study  s=new Study();
+		s.setInterfaceId("DDC2001");
+		s.setSubjectId("6910089");
+		s.setIdentityCard("431022199612250036");
+		s.setMobilephone("17708404197");
+		s.setServiceType("BA");
+		s.setDecisionId("12345");
+		s.setIpAddress("123.56.180.216");
+		s.setUserSource("C");
+		microclassService.ddcStudyAnswer(s);
+	}
+	
+	/**
+	 * 电动车违法答题
+	 */
+	@Test
+	public  void ddcAnswerQuey(){
+		Study  s=new Study();
+		s.setInterfaceId("DDC2002");
+		s.setSubjectId("6923386");
+		s.setIdentityCard("431022199612250036");
+		s.setMobilephone("17708404197");
+		s.setServiceType("BA");
+		s.setIpAddress("123.56.180.216");
+		s.setUserSource("C");
+		s.setSubjectAnswer("A");
+		s.setDecisionId("12345");
+		microclassService.ddcAnswerQuey(s);
+		
+	}
+	
+	
+	
+	
+	/**
+	 * 满分
+	 */
+	@Test
+	public void  mfStudyQuery(){
+		Study  s=new Study();
+		s.setInterfaceId("mfyydtjgcx");
+		s.setIdentityCard("431022199612250036");
+		s.setMobilephone("17708404197");
+		s.setIpAddress("123.56.180.216");
+		s.setUserSource("C");
+		microclassService.mfStudyQuery(s);
+	}
+	
+	
+	/**
+	 * 电动车违法随机取题
+	 */
+	@Test
+	public void mfStudyAnswer(){
+		Study  s=new Study();
+		s.setInterfaceId("mfyyqt");
+		s.setSubjectId("6910089");
+		s.setIdentityCard("431022199612250036");
+		s.setMobilephone("17708404197");
+		s.setServiceType("BA");
+		s.setDecisionId("12345");
+		s.setIpAddress("123.56.180.216");
+		s.setUserSource("C");
+		microclassService.mfStudyAnswer(s);
+	}
+	
+	/**
+	 * 电动车违法答题
+	 */
+	@Test
+	public  void mfAnswerQuey(){
+		Study  s=new Study();
+		s.setInterfaceId("mfyydt");
+		s.setSubjectId("6923386");
+		s.setIdentityCard("431022199612250036");
+		s.setMobilephone("17708404197");
+		s.setIpAddress("123.56.180.216");
+		s.setUserSource("C");
+		s.setSubjectAnswer("A");
+		microclassService.mfAnswerQuey(s);
+		
+	}
+	
     
 }

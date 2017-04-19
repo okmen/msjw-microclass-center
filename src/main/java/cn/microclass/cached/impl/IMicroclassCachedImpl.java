@@ -1,12 +1,17 @@
 package cn.microclass.cached.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import cn.microclass.bean.studyclassroom.Study;
 import cn.microclass.cached.IMicroclassCached;
+import cn.sdk.cache.ICacheManger;
 
 
 @Service
@@ -38,10 +43,13 @@ public class IMicroclassCachedImpl implements IMicroclassCached {
      */
     @Value("${key}")
     private String key;
+    
+    @Autowired
+	@Qualifier("jedisCacheManagerImpl")
+	private ICacheManger<Object> objectcacheManger;
 	
 	@Override
 	public List<Study> findUser(Study study) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	public String getUserid() {
