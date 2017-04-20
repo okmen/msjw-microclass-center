@@ -44,6 +44,7 @@ public class TestAccountService {
 	@Test
 	public void xfStudyQuery(){
 		Study  s=new Study();
+		s.setClassroomId("1");
 		s.setInterfaceId("exam003");
 		s.setIdentityCard("431022199612250036");
 		s.setMobilephone("17708404197");
@@ -76,7 +77,7 @@ public class TestAccountService {
 		public void xfAnswerQuey(){
 			Study  s=new Study();
 			s.setInterfaceId("exam002");
-			s.setSubjectId("3861909");  //取题ID
+			s.setSubjectId("3900792");  //取题ID
 			s.setUserName("曾令成");		
 			s.setIdentityCard("431022199612250036"); //身份证号码
 			s.setMobilephone("17708404197"); //手机号码
@@ -98,8 +99,14 @@ public class TestAccountService {
 	public void  xrStudyQuery(){
 		Study  s=new Study();
 		s.setInterfaceId("DDC3003");
-		s.setIdentityCard("431022199612250036");
-		s.setMobilephone("17708404197");
+		/*s.setIdentityCard("440301199002101119");
+		s.setMobilephone("18603017278");*/
+		
+	/*	s.setIdentityCard("420881198302280017");
+		s.setMobilephone("18601174358");*/
+		s.setIdentityCard("622822198502074110");
+		s.setMobilephone("15920071829");
+		
 		s.setServiceType("AQ");
 		s.setIpAddress("123.56.180.216");
 		s.setUserSource("C");
@@ -146,11 +153,12 @@ public class TestAccountService {
 		s.setInterfaceId("DDC2003");
 		s.setIdentityCard("431022199612250036");
 		s.setMobilephone("17708404197");
+		s.setClassroomId("4");
 		s.setServiceType("BA");
 		s.setDecisionId("12345");
 		s.setIpAddress("123.56.180.216");
 		s.setUserSource("C");
-		microclassService.ddcStudyQuery(s);
+		microclassService.xrStudyQuery(s);
 	}
 	
 	
@@ -200,47 +208,92 @@ public class TestAccountService {
 	public void  mfStudyQuery(){
 		Study  s=new Study();
 		s.setInterfaceId("mfyydtjgcx");
-		s.setIdentityCard("431022199612250036");
-		s.setMobilephone("17708404197");
+		/*s.setIdentityCard("431022199612250036");
+		s.setMobilephone("17708404197");*/
+		s.setClassroomId("2");
+		s.setIdentityCard("440301199002101119");
+		s.setMobilephone("18603017278");
 		s.setIpAddress("123.56.180.216");
 		s.setUserSource("C");
-		microclassService.mfStudyQuery(s);
+		//microclassService.mfStudyQuery(s);
+		microclassService.xrStudyQuery(s);
 	}
-	
-	
-	/**
-	 * 电动车违法随机取题
-	 */
+	//满分取题
 	@Test
-	public void mfStudyAnswer(){
+	public void mfqt(){
 		Study  s=new Study();
 		s.setInterfaceId("mfyyqt");
-		s.setSubjectId("6910089");
-		s.setIdentityCard("431022199612250036");
-		s.setMobilephone("17708404197");
-		s.setServiceType("BA");
-		s.setDecisionId("12345");
+		s.setIdentityCard("440301199002101119");
+		s.setMobilephone("18603017278");
 		s.setIpAddress("123.56.180.216");
 		s.setUserSource("C");
-		microclassService.mfStudyAnswer(s);
+		microclassService.xfStudyAnswer(s);
 	}
 	
-	/**
-	 * 电动车违法答题
-	 */
+	//满分答题
 	@Test
-	public  void mfAnswerQuey(){
+	public void mfdt(){
 		Study  s=new Study();
 		s.setInterfaceId("mfyydt");
-		s.setSubjectId("6923386");
-		s.setIdentityCard("431022199612250036");
-		s.setMobilephone("17708404197");
-		s.setIpAddress("123.56.180.216");
+		s.setSubjectId("709672");  //取题ID
+		s.setUserName("杨明畅");		
+		s.setIdentityCard("440301199002101119"); //身份证号码
+		s.setMobilephone("18603017278"); //手机号码
+		s.setIpAddress("123.56.180.216"); //答题IP地址
+		s.setSubjectAnswer("A"); //答题答案 
+		s.setAnswerDateTime("2017-04-17 10:59:49");
+		s.setScoreStartDate("2016-08-04"); //取题时的计分周期始
+		s.setScoreEndDate("2017-08-04"); //取题时的计分周期末
 		s.setUserSource("C");
-		s.setSubjectAnswer("A");
-		microclassService.mfAnswerQuey(s);
-		
+		microclassService.xfAnswerQuey(s);
 	}
 	
+	
+	/**
+	 * B类驾照查询
+	 */
+	@Test
+	public void  blStudyQuery(){
+		Study  s=new Study();
+		s.setInterfaceId("blyydtjgcx");
+		/*s.setIdentityCard("431022199612250036");
+		s.setMobilephone("17708404197");*/
+		s.setClassroomId("3");
+		s.setIdentityCard("440301199002101119");
+		s.setMobilephone("18603017278");
+		s.setIpAddress("123.56.180.216");
+		s.setUserSource("C");
+		//microclassService.mfStudyQuery(s);
+		microclassService.xrStudyQuery(s);
+	}
+	//B类取题
+	@Test
+	public void blqt(){
+		Study  s=new Study();
+	    s.setInterfaceId("blyyqt");
+		s.setIdentityCard("440301199002101119");
+		s.setMobilephone("18603017278");
+		s.setIpAddress("123.56.180.216");
+		s.setUserSource("C");
+		microclassService.xfStudyAnswer(s);
+	}
+	
+	//B类答题
+	@Test
+	public void bldt(){
+		Study  s=new Study();
+		s.setInterfaceId("blyydt");
+		s.setSubjectId("709672");  //取题ID
+		s.setUserName("杨明畅");		
+		s.setIdentityCard("440301199002101119"); //身份证号码
+		s.setMobilephone("18603017278"); //手机号码
+		s.setIpAddress("123.56.180.216"); //答题IP地址
+		s.setSubjectAnswer("A"); //答题答案 
+		s.setAnswerDateTime("2017-04-17 10:59:49");
+		s.setScoreStartDate("2016-08-04"); //取题时的计分周期始
+		s.setScoreEndDate("2017-08-04"); //取题时的计分周期末
+		s.setUserSource("C");
+		microclassService.xfAnswerQuey(s);
+	}
     
 }
