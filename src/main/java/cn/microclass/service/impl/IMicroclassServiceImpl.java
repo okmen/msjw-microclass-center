@@ -70,7 +70,7 @@ public class IMicroclassServiceImpl implements IMicroclassServer {
 			list.add(base);
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.error("传入参数有误="+ s.toString(),e);
+			logger.error("xfStudyQuery出错："+ s.toString(),e);
 		}
 		return list;
 	}
@@ -169,8 +169,7 @@ public class IMicroclassServiceImpl implements IMicroclassServer {
 			base.setData(studyList);
 			list.add(base);
 		} catch (Exception e) {
-			e.printStackTrace();
-			logger.error("空指针异常="+ s.toString(),e);
+			logger.error("xfStudyAnswer出错="+ s.toString(),e);
 		}
 		return list;
 	}
@@ -214,8 +213,7 @@ public class IMicroclassServiceImpl implements IMicroclassServer {
 			base.setData(studyList);
 			list.add(base);
 		} catch (Exception e) {
-			e.printStackTrace();
-			logger.error("空指针异常="+ s.toString(),e);
+			logger.error("xfAnswerQuey方法出错="+ s.toString(),e);
 			
 		}
 		return list;
@@ -311,8 +309,7 @@ public class IMicroclassServiceImpl implements IMicroclassServer {
 			base.setData(studyList);
 			list.add(base);
 		} catch (Exception e) {
-			e.printStackTrace();
-			logger.error("空指针异常="+ s.toString(),e);
+			logger.error("xrStudyQuery方法出错"+ s.toString(),e);
 		}
 		return list;
 	}
@@ -404,8 +401,7 @@ public class IMicroclassServiceImpl implements IMicroclassServer {
 			base.setData(studyList);
 			list.add(base);
 		} catch (Exception e) {
-			e.printStackTrace();
-			logger.error("空指针异常="+ s.toString(),e);
+			logger.error("xrStudyAnswer方法出错"+ s.toString(),e);
 		}
 		return list;
 	}
@@ -448,7 +444,7 @@ public class IMicroclassServiceImpl implements IMicroclassServer {
 			list.add(base);
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.error("空指针异常="+ s.toString(),e);
+			logger.error("xrAnswerQuey方法出错"+ s.toString(),e);
 		}
 		
 		return list;
@@ -539,7 +535,7 @@ public class IMicroclassServiceImpl implements IMicroclassServer {
 			list.add(base);
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.error("空指针异常="+ s.toString(),e);
+			logger.error("ddcStudyAnswer方法出错"+ s.toString(),e);
 		}	
 		return list;
 	}
@@ -591,8 +587,8 @@ public class IMicroclassServiceImpl implements IMicroclassServer {
 			base.setData(studyList);
 			list.add(base);
 		} catch (Exception e) {
-			e.printStackTrace();
-			logger.error("空指针异常="+ s.toString(),e);
+			
+			logger.error("ddcAnswerQuey方法出错"+ s.toString(),e);
 		}
 		return list;
 	}
