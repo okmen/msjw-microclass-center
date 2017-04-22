@@ -17,6 +17,6 @@
 	<import resource="classpath*:/applicationContext-mybatis.xml" />
 
 
-	<dubbo:service interface="cn.microclass.service.IMicroclassServer" ref="microclassService" />
+	<dubbo:service interface="cn.microclass.service.IMicroclassService" ref="microclassService" />
 
 </beans>

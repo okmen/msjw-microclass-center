@@ -24,13 +24,13 @@ import cn.microclass.bean.studyclassroom.Answeroptions;
 import cn.microclass.bean.studyclassroom.Study;
 import cn.microclass.bean.studyclassroom.StudyRecord;
 import cn.microclass.cached.impl.IMicroclassCachedImpl;
-import cn.microclass.service.IMicroclassServer;
+import cn.microclass.service.IMicroclassService;
 import cn.sdk.bean.BaseBean;
 import cn.sdk.util.StringUtil;
 import cn.sdk.webservice.WebServiceClient;
 @Service("microclassService")
 @SuppressWarnings(value="all")
-public class IMicroclassServiceImpl implements IMicroclassServer {
+public class IMicroclassServiceImpl implements IMicroclassService {
 
 	@Autowired
 	private IMicroclassCachedImpl  iMicroclassCached;

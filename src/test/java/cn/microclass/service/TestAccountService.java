@@ -19,7 +19,6 @@ import cn.microclass.bean.UserOpenidBean;
 import cn.microclass.bean.UserRegInfo;
 import cn.microclass.bean.WechatUserInfoBean;
 import cn.microclass.bean.studyclassroom.Study;
-import cn.microclass.service.IMicroclassServer;
 import cn.sdk.bean.BaseBean;
 import cn.sdk.util.AESNewUtils;
 import cn.sdk.util.DESUtils;
@@ -34,7 +33,7 @@ public class TestAccountService {
 
     @Autowired
     @Qualifier("microclassService")
-    private IMicroclassServer microclassService;
+    private IMicroclassService microclassService;
     
 	
  
@@ -134,13 +133,15 @@ public class TestAccountService {
 	public void xrAnswerQuey(){
 		Study  s=new Study();
 		s.setInterfaceId("DDC3002");
-		s.setSubjectId("6910099");
-		s.setIdentityCard("431022199612250036");
-		s.setMobilephone("17708404197");
+		s.setSubjectId("6967784");
+		/*s.setIdentityCard("431022199612250036");
+		s.setMobilephone("17708404197");*/	
+		s.setIdentityCard("440301199002101119");
+		s.setMobilephone("18603017278");
 		s.setServiceType("AQ");
 		s.setIpAddress("123.56.180.216");
 		s.setUserSource("C");
-		s.setSubjectAnswer("A");
+		s.setSubjectAnswer("ABCD");
 		microclassService.xrAnswerQuey(s);
 	}
 	
@@ -223,6 +224,7 @@ public class TestAccountService {
 	public void mfqt(){
 		Study  s=new Study();
 		s.setInterfaceId("mfyyqt");
+		s.setClassroomId("2");
 		s.setIdentityCard("440301199002101119");
 		s.setMobilephone("18603017278");
 		s.setIpAddress("123.56.180.216");
@@ -271,8 +273,11 @@ public class TestAccountService {
 	public void blqt(){
 		Study  s=new Study();
 	    s.setInterfaceId("blyyqt");
+	    s.setClassroomId("3");
 		s.setIdentityCard("440301199002101119");
 		s.setMobilephone("18603017278");
+	   /* s.setIdentityCard("431022199612250036");
+		s.setMobilephone("17708404197");*/
 		s.setIpAddress("123.56.180.216");
 		s.setUserSource("C");
 		microclassService.xfStudyAnswer(s);
@@ -283,7 +288,7 @@ public class TestAccountService {
 	public void bldt(){
 		Study  s=new Study();
 		s.setInterfaceId("blyydt");
-		s.setSubjectId("709672");  //取题ID
+		s.setSubjectId("712149");  //取题ID
 		s.setUserName("杨明畅");		
 		s.setIdentityCard("440301199002101119"); //身份证号码
 		s.setMobilephone("18603017278"); //手机号码
