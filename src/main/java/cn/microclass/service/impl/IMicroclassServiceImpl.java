@@ -45,9 +45,10 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 		List<BaseBean>list=new ArrayList<>();
 		BaseBean base=new BaseBean();
 		List<Study>studyList=new ArrayList<>();
+		try {
 		String xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?><request><head><sfzmhm>"+s.getIdentityCard()+"</sfzmhm>"
 				+ "<sjhm>"+s.getMobilephone()+"</sjhm><ip>"+s.getIpAddress()+"</ip><yhly>"+s.getUserSource()+"</yhly></head></request>";
-		try {
+		
 			String interfaceNumber = s.getInterfaceId();  //获取取题接口编号
 			JSONObject respStr =WebServiceClient.getInstance().requestWebService(iMicroclassCached.getUrl(), iMicroclassCached.getMethod(), 
 					interfaceNumber,xml,iMicroclassCached.getUserid(),iMicroclassCached.getUserpwd(),iMicroclassCached.getKey());
@@ -84,6 +85,7 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 		List<BaseBean>list=new ArrayList<>();
 		List<Study>studyList=new ArrayList<>();
 		List<Answeroptions>anserList=new ArrayList<>();
+		try {
 		String xml ="";
 		if(s.getClassroomId().equals("1")||s.getClassroomId().equals("2")||s.getClassroomId().equals("3")){
 			
@@ -97,7 +99,7 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 		}
 
 		String interfaceNumber = s.getInterfaceId();  //获取取题接口编号
-		try {		
+				
 			JSONObject respStr =WebServiceClient.getInstance().requestWebService(iMicroclassCached.getUrl(), iMicroclassCached.getMethod(), 
 					interfaceNumber,xml,iMicroclassCached.getUserid(),iMicroclassCached.getUserpwd(),iMicroclassCached.getKey());
 			System.out.println("serviceImplXML=="+xml);
@@ -184,10 +186,11 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 		List<BaseBean>list=new ArrayList<>();
 		BaseBean base=new BaseBean();
 		List<Study>studyList=new ArrayList<>();		
+		try {
 		String xx="<?xml version=\"1.0\" encoding=\"utf-8\"?><request><head><id>"+s.getSubjectId()+"</id><true_name>"+s.getUserName()+"</true_name>"
 				+ "<sfzmhm>"+s.getIdentityCard()+"</sfzmhm><sjhm>"+s.getMobilephone()+"</sjhm><ip>"+s.getIpAddress()+"</ip><dt_qd>"+s.getUserSource()+"</dt_qd>"
 				+ "<dt_sj>"+s.getAnswerDateTime()+"</dt_sj><dt_da>"+s.getSubjectAnswer()+"</dt_da><jfzq_start>"+s.getScoreStartDate()+"</jfzq_start><jfzq_end>"+s.getScoreEndDate()+"</jfzq_end></head></request>";
-		try {
+		
 			String interfaceNumber = s.getInterfaceId();  //获取取题接口编号
 			JSONObject respStr =WebServiceClient.getInstance().requestWebService(iMicroclassCached.getUrl(), iMicroclassCached.getMethod(), 
 					interfaceNumber,xx,iMicroclassCached.getUserid(),iMicroclassCached.getUserpwd(),iMicroclassCached.getKey());
@@ -199,6 +202,10 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 			Object dcts=head.get("dcts"); //答错题数
 			if(dcts!=null&&!dcts.equals("")){
 				s.setAnswererror(Integer.valueOf(head.get("dcts").toString()));  //答题错误题数
+			}
+			Object ddts=head.get("ddts"); //答对题数
+			if(ddts!=null&&ddts.equals("")){
+				s.setAnswerCorrect(Integer.valueOf(head.get("ddts").toString())); //答对题数
 			}
 			Object pcjg=head.get("pcjg");
 			if(pcjg!=null&&!pcjg.equals("")){
@@ -225,10 +232,12 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 	 */
 	@Override
 	public List<BaseBean> xrStudyQuery(Study s) {
+		
 		List<BaseBean>list=new ArrayList<>();
 		BaseBean base=new BaseBean();
 		List<Study>studyList=new ArrayList<>();
 		List<StudyRecord>studyrecordList=new ArrayList<>();
+		try {
 		String xfxx="";
 		if(s.getClassroomId().equals("1")||s.getClassroomId().equals("2")||s.getClassroomId().equals("3")){ 
 			xfxx="<?xml version=\"1.0\" encoding=\"utf-8\"?>"
@@ -241,7 +250,7 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 					+ "<sjhm>"+s.getMobilephone()+"</sjhm><ywlx>"+s.getServiceType()+"</ywlx><ip>"+s.getIpAddress()+"</ip><yhly>"+s.getUserSource()+"</yhly></head></request>";
 		}
 	
-		try {
+		
 			String interfaceNumber = s.getInterfaceId();  //获取取题接口编号
 			JSONObject respStr =WebServiceClient.getInstance().requestWebService(iMicroclassCached.getUrl(), iMicroclassCached.getMethod(), 
 			interfaceNumber,xfxx,iMicroclassCached.getUserid(),iMicroclassCached.getUserpwd(),iMicroclassCached.getKey());
@@ -323,12 +332,13 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 		BaseBean base=new BaseBean();
 		List<Study>studyList=new ArrayList<>();
 		List<Answeroptions>anserList=new ArrayList<>();
+		try {
 		String xml="<?xml version=\"1.0\" encoding=\"utf-8\"?>"
 				+ "<request><head><sfzmhm>"+s.getIdentityCard()+"</sfzmhm>"
 				+ "<sjhm>"+s.getMobilephone()+"</sjhm><ywlx>"+s.getServiceType()+"</ywlx><ip>"+s.getIpAddress()+"</ip><yhly>"+s.getUserSource()+"</yhly></head></request>";
 		
 		String interfaceNumber = s.getInterfaceId();  //获取取题接口编号
-		try {		
+				
 			JSONObject respStr =WebServiceClient.getInstance().requestWebService(iMicroclassCached.getUrl(), iMicroclassCached.getMethod(), 
 					interfaceNumber,xml,iMicroclassCached.getUserid(),iMicroclassCached.getUserpwd(),iMicroclassCached.getKey());
 			System.out.println("center实现层次返回=="+respStr);
@@ -414,11 +424,12 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 		List<BaseBean>list=new ArrayList<>();
 		BaseBean base=new BaseBean();
 		List<Study>studyList=new ArrayList<>();
+		try {
 		String xml="<?xml version=\"1.0\" encoding=\"utf-8\"?><request><head><id>"+s.getSubjectId()+"</id>"
 				+ "<sfzmhm>"+s.getIdentityCard()+"</sfzmhm><sjhm>"+s.getMobilephone()+"</sjhm><ywlx>AQ</ywlx><ip>"+s.getIpAddress()+"</ip><dt_qd>"+s.getUserSource()+"</dt_qd>"
 				+ "<dt_da>"+s.getSubjectAnswer()+"</dt_da></head></request>";
 		String interfaceNumber = s.getInterfaceId();  //获取取题接口编号
-		try {		
+				
 			JSONObject respStr =WebServiceClient.getInstance().requestWebService(iMicroclassCached.getUrl(), iMicroclassCached.getMethod(), 
 					interfaceNumber,xml,iMicroclassCached.getUserid(),iMicroclassCached.getUserpwd(),iMicroclassCached.getKey());
 			System.out.println("center实现层次返回=="+respStr);
@@ -462,9 +473,10 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 		List<Study>studyList=new ArrayList<>();
 		List<StudyRecord>studyrecordList=new ArrayList<>();
 		List<Answeroptions>anserList=new ArrayList<>();
+		try {
 		String xml="<?xml version=\"1.0\" encoding=\"utf-8\"?><request><head><sfzmhm>"+s.getIdentityCard()+"</sfzmhm><sjhm>"+s.getMobilephone()+"</sjhm>"
 				+ "<ywlx>"+s.getServiceType()+"</ywlx><jdsbh>"+s.getDecisionId()+"</jdsbh><ip>"+s.getIpAddress()+"</ip><yhly>"+s.getUserSource()+"</yhly></head></request>";
-		try {
+		
 			String interfaceNumber = s.getInterfaceId();  //获取取题接口编号
 			JSONObject respStr =WebServiceClient.getInstance().requestWebService(iMicroclassCached.getUrl(), iMicroclassCached.getMethod(), 
 					interfaceNumber,xml,iMicroclassCached.getUserid(),iMicroclassCached.getUserpwd(),iMicroclassCached.getKey());
@@ -550,11 +562,12 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 		List<BaseBean>list=new ArrayList<>();
 		BaseBean base=new BaseBean();
 		List<Study>studyList=new ArrayList<>();
+		try {	
 		String xml="<?xml version=\"1.0\" encoding=\"utf-8\"?><request><head><id>"+s.getSubjectId()+"</id><sfzmhm>"+s.getIdentityCard()+"</sfzmhm><sjhm>"+s.getMobilephone()+"</sjhm>"
 				+ "<ywlx>"+s.getServiceType()+"</ywlx><jdsbh>"+s.getDecisionId()+"</jdsbh><ip>"+s.getIpAddress()+"</ip><dt_qd>C</dt_qd><yhly>"+s.getUserSource()+"</yhly><dt_da>"+s.getSubjectAnswer()+"</dt_da></head></request>";
 		
 		String interfaceNumber = s.getInterfaceId();  //获取取题接口编号
-		try {		
+			
 			JSONObject respStr =WebServiceClient.getInstance().requestWebService(iMicroclassCached.getUrl(), iMicroclassCached.getMethod(), 
 					interfaceNumber,xml,iMicroclassCached.getUserid(),iMicroclassCached.getUserpwd(),iMicroclassCached.getKey());
 			System.out.println("center实现层次返回=="+respStr);
