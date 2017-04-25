@@ -204,7 +204,7 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 				s.setAnswererror(Integer.valueOf(head.get("dcts").toString()));  //答题错误题数
 			}
 			Object ddts=head.get("ddts"); //答对题数
-			if(ddts!=null&&ddts.equals("")){
+			if(ddts!=null&&!ddts.equals("")){
 				s.setAnswerCorrect(Integer.valueOf(head.get("ddts").toString())); //答对题数
 			}
 			Object pcjg=head.get("pcjg");
