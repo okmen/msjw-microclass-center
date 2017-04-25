@@ -122,10 +122,12 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 				if(body.getString("qt_stlx").toString().equals("判断题")){
 					Answeroptions anser1=new Answeroptions();
 					anser1.setAnswerId("A");
+					anser1.setAnswerIds("Y");
 					anser1.setAnswerName("正确");
 					anserList.add(anser1);
 					Answeroptions anser2=new Answeroptions();
 					anser2.setAnswerId("B");
+					anser2.setAnswerIds("N");
 					anser2.setAnswerName("错误");
 					anserList.add(anser2);
 					
@@ -362,11 +364,13 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 				if(body.getString("qt_stlx").toString().equals("判断题")){
 					Answeroptions anser1=new Answeroptions();
 					anser1.setAnswerId("A");
+					anser1.setAnswerIds("Y");
 					anser1.setAnswerName("正确");
 					anserList.add(anser1);
 					Answeroptions anser2=new Answeroptions();
 					anser2.setAnswerId("B");
 					anser2.setAnswerName("错误");
+					anser2.setAnswerIds("N");
 					anserList.add(anser2);
 					
 				}else{
@@ -498,10 +502,12 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 					Answeroptions anser1=new Answeroptions();
 					anser1.setAnswerId("A");
 					anser1.setAnswerName("正确");
+					anser1.setAnswerIds("Y");
 					anserList.add(anser1);
 					Answeroptions anser2=new Answeroptions();
 					anser2.setAnswerId("B");
 					anser2.setAnswerName("错误");
+					anser2.setAnswerIds("N");
 					anserList.add(anser2);
 					
 				}else{					
