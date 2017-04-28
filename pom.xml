@@ -287,7 +287,7 @@
 				<!-- 警司通参数 -->
 				<jiaojing.userid>WX02</jiaojing.userid>
 				<jiaojing.userpwd>WX02@168</jiaojing.userpwd>
-				<jiaojing.url>http://api.szjj.me:9080/xxfbpt/services/xxfbptservice?wsdl</jiaojing.url>						
+				<jiaojing.url>http://api.szjj.me:9080/xxfbpt/services/xxfbptservice</jiaojing.url>						
 				<jiaojing.method>xxptSchuding</jiaojing.method>
 				<jiaojing.key>94D863D9BE7FB032E6A19430CC892610</jiaojing.key>
 			</properties>
