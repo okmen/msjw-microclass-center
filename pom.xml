@@ -257,11 +257,13 @@
 				<dubbo.monitor.address><![CDATA[monitor.szjj.me:7070]]></dubbo.monitor.address>
 
 				<mysql.microclass.read.url><![CDATA[jdbc:mysql://db.szjj.me:3306/cm_choumeionline?useUnicode=true&autoReconnect=true&characterEncoding=UTF-8]]></mysql.microclass.read.url>
-				<mysql.microclass.read.username><![CDATA[app_microclass-center]]></mysql.microclass.read.username>
+				<mysql.microclass.read.username><![CDATA[root]]></mysql.microclass.read.username>
+				<mysql.microclass.read.password><![CDATA[123456]]></mysql.microclass.read.password>
 				
 				<mysql.microclass.write.url><![CDATA[jdbc:mysql://db.szjj.me:3306/cm_choumeionline?useUnicode=true&autoReconnect=true&characterEncoding=UTF-8]]></mysql.microclass.write.url>
-				<mysql.microclass.write.username><![CDATA[app_microclass-center]]></mysql.microclass.write.username>
-
+				<mysql.microclass.write.username><![CDATA[root]]></mysql.microclass.write.username>
+				<mysql.microclass.write.password><![CDATA[123456]]></mysql.microclass.write.password>
+				
 				<mysql.microclass.password.config><![CDATA[config.file=/workspace/druid/choumei-password_online.properties;secretkey.file=/workspace/druid/key_online]]></mysql.microclass.password.config>
 
 				<redis.user-center.configstr><![CDATA[user-center1:redis.szjj.me:6379]]></redis.user-center.configstr>
@@ -285,8 +287,7 @@
 				<!-- 警司通参数 -->
 				<jiaojing.userid>WX02</jiaojing.userid>
 				<jiaojing.userpwd>WX02@168</jiaojing.userpwd>
-				<jiaojing.url>http://api.szjj.me:9080/xxfbpt/services/xxfbptservice?wsdl</jiaojing.url>
-							  
+				<jiaojing.url>http://api.szjj.me:9080/xxfbpt/services/xxfbptservice?wsdl</jiaojing.url>						
 				<jiaojing.method>xxptSchuding</jiaojing.method>
 				<jiaojing.key>94D863D9BE7FB032E6A19430CC892610</jiaojing.key>
 			</properties>
