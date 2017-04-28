@@ -256,11 +256,11 @@
 				<dubbo.provider.timeout><![CDATA[35000]]></dubbo.provider.timeout>
 				<dubbo.monitor.address><![CDATA[monitor.szjj.me:7070]]></dubbo.monitor.address>
 
-				<mysql.microclass.read.url><![CDATA[jdbc:mysql://db.szjj.me:3306/cm_choumeionline?useUnicode=true&autoReconnect=true&characterEncoding=UTF-8]]></mysql.microclass.read.url>
+				<mysql.microclass.read.url><![CDATA[jdbc:mysql://db.szjj.me:3306/service?useUnicode=true&autoReconnect=true&characterEncoding=UTF-8]]></mysql.microclass.read.url>
 				<mysql.microclass.read.username><![CDATA[root]]></mysql.microclass.read.username>
 				<mysql.microclass.read.password><![CDATA[123456]]></mysql.microclass.read.password>
 				
-				<mysql.microclass.write.url><![CDATA[jdbc:mysql://db.szjj.me:3306/cm_choumeionline?useUnicode=true&autoReconnect=true&characterEncoding=UTF-8]]></mysql.microclass.write.url>
+				<mysql.microclass.write.url><![CDATA[jdbc:mysql://db.szjj.me:3306/service?useUnicode=true&autoReconnect=true&characterEncoding=UTF-8]]></mysql.microclass.write.url>
 				<mysql.microclass.write.username><![CDATA[root]]></mysql.microclass.write.username>
 				<mysql.microclass.write.password><![CDATA[123456]]></mysql.microclass.write.password>
 				
