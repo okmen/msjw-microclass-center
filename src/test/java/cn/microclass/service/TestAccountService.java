@@ -39,9 +39,10 @@ public class TestAccountService {
  
 	/**
 	 * 消分业务相关查询
+	 * @throws Exception 
 	 */
 	@Test
-	public void xfStudyQuery(){
+	public void xfStudyQuery() throws Exception{
 		Study  s=new Study();
 		s.setClassroomId("1");
 		s.setInterfaceId("exam003");
@@ -58,9 +59,10 @@ public class TestAccountService {
 	}
 	    /**
 		 * 消分业务随机取题
+	     * @throws Exception 
 		 */
 		@Test
-		public void testXfStudyAnswer() {
+		public void testXfStudyAnswer() throws Exception {
 			Study  s=new Study();
 			s.setInterfaceId("exam001");
 			s.setIdentityCard("431022199612250036");
@@ -71,9 +73,10 @@ public class TestAccountService {
 		}
 		/**
 		 * 消分业务答题
+		 * @throws Exception 
 		 */
 		@Test
-		public void xfAnswerQuey(){
+		public void xfAnswerQuey() throws Exception{
 			Study  s=new Study();
 			s.setInterfaceId("exam002");
 			s.setSubjectId("3900792");  //取题ID
@@ -93,9 +96,10 @@ public class TestAccountService {
 	
 	/**
 	 * 6.34.3	行人、非机动车驾驶人道路交通安全学习查询接口 
+	 * @throws Exception 
 	 */
 	@Test
-	public void  xrStudyQuery(){
+	public void  xrStudyQuery() throws Exception{
 		Study  s=new Study();
 		s.setInterfaceId("DDC3003");
 		/*s.setIdentityCard("440301199002101119");
@@ -114,9 +118,10 @@ public class TestAccountService {
 	
 	/**
 	 * 6.34.3	行人、非机动车驾驶人道路交通安全学习随机取题
+	 * @throws Exception 
 	 */
 	@Test
-	public void xrStudyAnswer(){
+	public void xrStudyAnswer() throws Exception{
 		Study  s=new Study();
 		s.setInterfaceId("DDC3001");
 		s.setIdentityCard("431022199612250036");
@@ -128,9 +133,10 @@ public class TestAccountService {
 	}
 	/**
 	 * 行人、非机动车驾驶人道路交通安全学习 答题接口
+	 * @throws Exception 
 	 */
 	@Test		
-	public void xrAnswerQuey(){
+	public void xrAnswerQuey() throws Exception{
 		Study  s=new Study();
 		s.setInterfaceId("DDC3002");
 		s.setSubjectId("6967784");
@@ -147,9 +153,10 @@ public class TestAccountService {
 	
 	/**
 	 * 电动车违法查询
+	 * @throws Exception 
 	 */
 	@Test
-	public void  ddcStudyQuery(){
+	public void  ddcStudyQuery() throws Exception{
 		Study  s=new Study();
 		s.setInterfaceId("DDC2003");
 		s.setIdentityCard("431022199612250036");
@@ -165,9 +172,10 @@ public class TestAccountService {
 	
 	/**
 	 * 电动车违法随机取题
+	 * @throws Exception 
 	 */
 	@Test
-	public void ddcStudyAnswer(){
+	public void ddcStudyAnswer() throws Exception{
 		Study  s=new Study();
 		s.setInterfaceId("DDC2001");
 		s.setSubjectId("6910089");
@@ -182,9 +190,10 @@ public class TestAccountService {
 	
 	/**
 	 * 电动车违法答题
+	 * @throws Exception 
 	 */
 	@Test
-	public  void ddcAnswerQuey(){
+	public  void ddcAnswerQuey() throws Exception{
 		Study  s=new Study();
 		s.setInterfaceId("DDC2002");
 		s.setSubjectId("6923386");
@@ -204,9 +213,10 @@ public class TestAccountService {
 	
 	/**
 	 * 满分
+	 * @throws Exception 
 	 */
 	@Test
-	public void  mfStudyQuery(){
+	public void  mfStudyQuery() throws Exception{
 		Study  s=new Study();
 		s.setInterfaceId("mfyydtjgcx");
 		/*s.setIdentityCard("431022199612250036");
@@ -221,7 +231,7 @@ public class TestAccountService {
 	}
 	//满分取题
 	@Test
-	public void mfqt(){
+	public void mfqt() throws Exception{
 		Study  s=new Study();
 		s.setInterfaceId("mfyyqt");
 		s.setClassroomId("2");
@@ -234,7 +244,7 @@ public class TestAccountService {
 	
 	//满分答题
 	@Test
-	public void mfdt(){
+	public void mfdt() throws Exception{
 		Study  s=new Study();
 		s.setInterfaceId("mfyydt");
 		s.setSubjectId("709672");  //取题ID
@@ -253,9 +263,10 @@ public class TestAccountService {
 	
 	/**
 	 * B类驾照查询
+	 * @throws Exception 
 	 */
 	@Test
-	public void  blStudyQuery(){
+	public void  blStudyQuery() throws Exception{
 		Study  s=new Study();
 		s.setInterfaceId("blyydtjgcx");
 		/*s.setIdentityCard("431022199612250036");
@@ -270,7 +281,7 @@ public class TestAccountService {
 	}
 	//B类取题
 	@Test
-	public void blqt(){
+	public void blqt() throws Exception{
 		Study  s=new Study();
 	    s.setInterfaceId("blyyqt");
 	    s.setClassroomId("3");
@@ -285,7 +296,7 @@ public class TestAccountService {
 	
 	//B类答题
 	@Test
-	public void bldt(){
+	public void bldt() throws Exception{
 		Study  s=new Study();
 		s.setInterfaceId("blyydt");
 		s.setSubjectId("712149");  //取题ID

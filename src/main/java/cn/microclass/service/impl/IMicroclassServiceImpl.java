@@ -40,8 +40,9 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 	
 	/**
 	 * 消分业务相关信息  接口 exam003
+	 * @throws Exception 
 	 */
-	public List<BaseBean> xfStudyQuery(Study s) {
+	public List<BaseBean> xfStudyQuery(Study s) throws Exception {
 		List<BaseBean>list=new ArrayList<>();
 		BaseBean base=new BaseBean();
 		List<Study>studyList=new ArrayList<>();
@@ -52,7 +53,7 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 			String interfaceNumber = s.getInterfaceId();  //获取取题接口编号
 			JSONObject respStr =WebServiceClient.getInstance().requestWebService(iMicroclassCached.getUrl(), iMicroclassCached.getMethod(), 
 					interfaceNumber,xml,iMicroclassCached.getUserid(),iMicroclassCached.getUserpwd(),iMicroclassCached.getKey());
-			System.out.println("center实现层次返回=="+respStr);
+			logger.info(respStr.toJSONString());
 			JSONObject body=respStr.getJSONObject("body");
 			JSONObject head=respStr.getJSONObject("head");
 			base.setCode(head.get("fhz").toString());
@@ -70,17 +71,18 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 			base.setData(studyList);
 			list.add(base);
 		} catch (Exception e) {
-			e.printStackTrace();
 			logger.error("xfStudyQuery出错："+ s.toString(),e);
+			throw e;
 		}
 		return list;
 	}
 	
 	/**
 	 * 消分学习随机取题接口 exam001
+	 * @throws Exception 
 	 */
 	@Override
-	public List<BaseBean> xfStudyAnswer(Study s) {
+	public List<BaseBean> xfStudyAnswer(Study s) throws Exception {
 		BaseBean base=new BaseBean();
 		List<BaseBean>list=new ArrayList<>();
 		List<Study>studyList=new ArrayList<>();
@@ -102,8 +104,8 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 				
 			JSONObject respStr =WebServiceClient.getInstance().requestWebService(iMicroclassCached.getUrl(), iMicroclassCached.getMethod(), 
 					interfaceNumber,xml,iMicroclassCached.getUserid(),iMicroclassCached.getUserpwd(),iMicroclassCached.getKey());
-			System.out.println("serviceImplXML=="+xml);
-			System.out.println("center实现层次返回=="+respStr);
+			logger.info(respStr.toJSONString());
+			
 			JSONObject body=respStr.getJSONObject("body");
 			JSONObject head=respStr.getJSONObject("head");
 			base.setCode(head.get("fhz").toString());
@@ -174,6 +176,7 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 			list.add(base);
 		} catch (Exception e) {
 			logger.error("xfStudyAnswer出错="+ s.toString(),e);
+			throw e;
 		}
 		return list;
 	}
@@ -182,9 +185,10 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 	
 	/**
 	 *消分学习答题： 接口exam002
+	 * @throws Exception 
 	 */
 	@Override
-	public List<BaseBean> xfAnswerQuey(Study s) {
+	public List<BaseBean> xfAnswerQuey(Study s) throws Exception {
 		List<BaseBean>list=new ArrayList<>();
 		BaseBean base=new BaseBean();
 		List<Study>studyList=new ArrayList<>();		
@@ -196,7 +200,7 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 			String interfaceNumber = s.getInterfaceId();  //获取取题接口编号
 			JSONObject respStr =WebServiceClient.getInstance().requestWebService(iMicroclassCached.getUrl(), iMicroclassCached.getMethod(), 
 					interfaceNumber,xx,iMicroclassCached.getUserid(),iMicroclassCached.getUserpwd(),iMicroclassCached.getKey());
-			System.out.println("center实现层次返回=="+respStr);
+			logger.info(respStr.toJSONString());
 			JSONObject body=respStr.getJSONObject("body");
 			JSONObject head=respStr.getJSONObject("head");
 			base.setCode(head.get("fhz").toString());
@@ -223,6 +227,7 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 			list.add(base);
 		} catch (Exception e) {
 			logger.error("xfAnswerQuey方法出错="+ s.toString(),e);
+			throw e;
 			
 		}
 		return list;
@@ -231,9 +236,10 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 
 	/**
 	 * 6.34.3	行人、非机动车驾驶人道路交通安全学习查询接口   和满分学习查询
+	 * @throws Exception 
 	 */
 	@Override
-	public List<BaseBean> xrStudyQuery(Study s) {
+	public List<BaseBean> xrStudyQuery(Study s) throws Exception {
 		
 		List<BaseBean>list=new ArrayList<>();
 		BaseBean base=new BaseBean();
@@ -251,12 +257,10 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 					+ "<request><head><sfzmhm>"+s.getIdentityCard()+"</sfzmhm>"
 					+ "<sjhm>"+s.getMobilephone()+"</sjhm><ywlx>"+s.getServiceType()+"</ywlx><ip>"+s.getIpAddress()+"</ip><yhly>"+s.getUserSource()+"</yhly></head></request>";
 		}
-	
-		
 			String interfaceNumber = s.getInterfaceId();  //获取取题接口编号
 			JSONObject respStr =WebServiceClient.getInstance().requestWebService(iMicroclassCached.getUrl(), iMicroclassCached.getMethod(), 
 			interfaceNumber,xfxx,iMicroclassCached.getUserid(),iMicroclassCached.getUserpwd(),iMicroclassCached.getKey());
-			System.out.println("center实现层次返回=="+respStr);
+			logger.info(respStr.toJSONString());
 			
 			JSONObject body=respStr.getJSONObject("body"); //获取json中body
 			JSONObject head=respStr.getJSONObject("head"); //获取json中head
@@ -285,11 +289,12 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 						studyrecord.setAnswerBatch(ob.get("dtpc").toString());
 						studyrecord.setIsComplete(null != ob.get("dtjg")?ob.get("dtjg").toString():"");	
 						studyrecordList.add(studyrecord);
-					}
+						
+					}	
 					s.setStudyRecord(studyrecordList);
 				}else if(!xString.contains("examlist")){
 					base.setMsg("没有学习记录");
-					System.out.println("没有学习记录");
+					logger.info("没有学习记录");
 				}else{
 					//String isexamlist=(String)body.get("examlist");
 					//if(isexamlist!=null&&!isexamlist.equals("")){
@@ -306,9 +311,6 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 					//}	
 				}
 			}
-			
-			
-			
 				s.setIdentityCard(body.get("jszhm").toString());
 				s.setUserName(body.getString("true_name").toString());
 				base.setMsg(head.get("fhz-msg").toString());	
@@ -321,15 +323,17 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 			list.add(base);
 		} catch (Exception e) {
 			logger.error("xrStudyQuery方法出错"+ s.toString(),e);
+			throw e;
 		}
 		return list;
 	}
 	
 	/**
 	 * 6.34.3	行人、非机动车驾驶人道路交通安全学习随机取题
+	 * @throws Exception 
 	 */
 	@Override
-	public List<BaseBean> xrStudyAnswer(Study s) {
+	public List<BaseBean> xrStudyAnswer(Study s) throws Exception {
 		List<BaseBean>list=new ArrayList<>();
 		BaseBean base=new BaseBean();
 		List<Study>studyList=new ArrayList<>();
@@ -343,7 +347,7 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 				
 			JSONObject respStr =WebServiceClient.getInstance().requestWebService(iMicroclassCached.getUrl(), iMicroclassCached.getMethod(), 
 					interfaceNumber,xml,iMicroclassCached.getUserid(),iMicroclassCached.getUserpwd(),iMicroclassCached.getKey());
-			System.out.println("center实现层次返回=="+respStr);
+			logger.info(respStr.toString());
 			JSONObject body=respStr.getJSONObject("body");
 			JSONObject head=respStr.getJSONObject("head");
 			base.setCode(head.get("fhz").toString());
@@ -405,8 +409,6 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 				}
 				s.setAnsweroptions(anserList);
 				s.setServiceType(body.get("ywlx").toString());
-				System.err.println("A=="+s.getAnswerA());
-				System.err.println("B=="+s.getAnswerB());
 				base.setMsg(head.get("fhz-msg").toString());	
 			}else{
 				base.setMsg(head.get("fhz-msg").toString());
@@ -416,15 +418,17 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 			list.add(base);
 		} catch (Exception e) {
 			logger.error("xrStudyAnswer方法出错"+ s.toString(),e);
+			throw e;
 		}
 		return list;
 	}
 	
 	/**
 	 * 6.34.3	行人、非机动车驾驶人道路交通安全学习答题方法
+	 * @throws Exception 
 	 */
 	@Override
-	public List<BaseBean> xrAnswerQuey(Study s) {
+	public List<BaseBean> xrAnswerQuey(Study s) throws Exception {
 		List<BaseBean>list=new ArrayList<>();
 		BaseBean base=new BaseBean();
 		List<Study>studyList=new ArrayList<>();
@@ -436,7 +440,7 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 				
 			JSONObject respStr =WebServiceClient.getInstance().requestWebService(iMicroclassCached.getUrl(), iMicroclassCached.getMethod(), 
 					interfaceNumber,xml,iMicroclassCached.getUserid(),iMicroclassCached.getUserpwd(),iMicroclassCached.getKey());
-			System.out.println("center实现层次返回=="+respStr);
+			logger.info(respStr.toJSONString());
 			JSONObject body=respStr.getJSONObject("body");
 			JSONObject head=respStr.getJSONObject("head");
 			if(head.get("fhz").toString().equals("0002")){
@@ -458,8 +462,8 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 			base.setData(studyList);
 			list.add(base);
 		} catch (Exception e) {
-			e.printStackTrace();
 			logger.error("xrAnswerQuey方法出错"+ s.toString(),e);
+			throw e;
 		}
 		
 		return list;
@@ -468,10 +472,11 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 	
 	/**
 	 * 电动车违法随机取题
+	 * @throws Exception 
 	 */
 	
 	@Override
-	public List<BaseBean> ddcStudyAnswer(Study s) {
+	public List<BaseBean> ddcStudyAnswer(Study s) throws Exception {
 		List<BaseBean>list=new ArrayList<>();
 		BaseBean base=new BaseBean();
 		List<Study>studyList=new ArrayList<>();
@@ -484,7 +489,7 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 			String interfaceNumber = s.getInterfaceId();  //获取取题接口编号
 			JSONObject respStr =WebServiceClient.getInstance().requestWebService(iMicroclassCached.getUrl(), iMicroclassCached.getMethod(), 
 					interfaceNumber,xml,iMicroclassCached.getUserid(),iMicroclassCached.getUserpwd(),iMicroclassCached.getKey());
-			System.out.println("center实现层次返回=="+respStr);
+			logger.info(respStr.toJSONString());
 			JSONObject body=respStr.getJSONObject("body");
 			JSONObject head=respStr.getJSONObject("head");
 			base.setCode(head.get("fhz").toString());
@@ -542,8 +547,6 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 				}
 				s.setAnsweroptions(anserList);
 				s.setServiceType(body.get("ywlx").toString());
-				System.err.println("A=="+s.getAnswerA());
-				System.err.println("B=="+s.getAnswerB());
 				base.setMsg(head.get("fhz-msg").toString());	
 			}else{
 				base.setMsg(head.get("fhz-msg").toString());
@@ -552,8 +555,8 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 			base.setData(studyList);
 			list.add(base);
 		} catch (Exception e) {
-			e.printStackTrace();
 			logger.error("ddcStudyAnswer方法出错"+ s.toString(),e);
+			throw e;
 		}	
 		return list;
 	}
@@ -561,9 +564,10 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 	List<Study>jgList=null;
 	/**
 	 * 电动车违法答题方法
+	 * @throws Exception 
 	 */
 	@Override
-	public List<BaseBean> ddcAnswerQuey(Study s) {
+	public List<BaseBean> ddcAnswerQuey(Study s) throws Exception {
 	
 		List<BaseBean>list=new ArrayList<>();
 		BaseBean base=new BaseBean();
@@ -576,7 +580,7 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 			
 			JSONObject respStr =WebServiceClient.getInstance().requestWebService(iMicroclassCached.getUrl(), iMicroclassCached.getMethod(), 
 					interfaceNumber,xml,iMicroclassCached.getUserid(),iMicroclassCached.getUserpwd(),iMicroclassCached.getKey());
-			System.out.println("center实现层次返回=="+respStr);
+			logger.info(respStr.toJSONString());
 			JSONObject body=respStr.getJSONObject("body");
 			JSONObject head=respStr.getJSONObject("head");
 			if(head.get("fhz").toString().equals("0002")){
@@ -590,24 +594,15 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 				s.setBatchResult(head.get("pcjg").toString());
 				s.setSurplusAnswe(Integer.valueOf(head.get("syts").toString())); //剩余题数
 				s.setAnswerDate(s.getAnswerDate());  //答题时间 格式YYYY-MM-DD
-				/*if(s.getBatchResult().equals("不合格")||s.getBatchResult().equals("合格")){
-					
-					return list;
-				}*/
-				
 				s.setServiceType(head.get("ywlx").toString()); //业务类型
-				/*Object jdsbh=head.get("jdsbh").toString();
-				if(null!=jdsbh){
-					s.setDecisionId(null !=head.get("jdsbh")?head.get("jdsbh").toString():""); //决定书编号
-				}*/
 				s.setTrainResult(null !=head.get("pxjg")?head.get("pxjg").toString():"");  //接收培训结果
 			}				
 			studyList.add(s);
 			base.setData(studyList);
 			list.add(base);
 		} catch (Exception e) {
-			
 			logger.error("ddcAnswerQuey方法出错"+ s.toString(),e);
+			throw e;
 		}
 		return list;
 	}
