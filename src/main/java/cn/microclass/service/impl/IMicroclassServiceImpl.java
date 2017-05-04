@@ -235,7 +235,7 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 
 
 	/**
-	 * 6.34.3	行人、非机动车驾驶人道路交通安全学习查询接口   和满分学习查询
+	 * 满分 学习查询  、AB类驾驶人学习查询、 电动车学习查询、行人非机动车安全学习查询 方法
 	 * @throws Exception 
 	 */
 	@Override
