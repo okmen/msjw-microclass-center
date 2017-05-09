@@ -261,7 +261,6 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 			JSONObject respStr =WebServiceClient.getInstance().requestWebService(iMicroclassCached.getUrl(), iMicroclassCached.getMethod(), 
 			interfaceNumber,xfxx,iMicroclassCached.getUserid(),iMicroclassCached.getUserpwd(),iMicroclassCached.getKey());
 			logger.info(respStr.toJSONString());
-			
 			JSONObject body=respStr.getJSONObject("body"); //获取json中body
 			JSONObject head=respStr.getJSONObject("head"); //获取json中head
 			base.setCode(head.get("fhz").toString());
@@ -306,6 +305,7 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 					studyrecord.setAnswerDate(null !=examlists.get("dtrq")?examlists.get("dtrq").toString():"");	
 					studyrecord.setAnswerBatch(null !=examlists.get("dtpc")?examlists.get("dtpc").toString():"");
 					studyrecord.setIsComplete(null != examlists.get("dtjg")?examlists.get("dtjg").toString():"");
+					studyrecord.setAnsLogarithm(Integer.valueOf(examlists.get("ddts").toString()));
 					studyrecordList.add(studyrecord);
 					s.setStudyRecord(studyrecordList);
 					//}	
