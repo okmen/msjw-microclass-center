@@ -17,7 +17,31 @@ import cn.sdk.cache.ICacheManger;
 @Service
 public class IMicroclassCachedImpl implements IMicroclassCached {
 
-	
+	/**
+	 * 用户id
+	 */
+	@Value("${useridAlipay}")
+    private String useridAlipay;
+	/**
+	 * 用户密码
+	 */
+    @Value("${userpwdAlipay}")
+    private String userpwdAlipay;
+    /**
+     * 请求地址
+     */
+    @Value("${urlAlipay}")
+    private String urlAlipay;
+    /**
+     * 方法
+     */
+    @Value("${methodAlipay}")
+    private String methodAlipay;
+    /**
+     * 秘钥
+     */
+    @Value("${keyAlipay}")
+    private String keyAlipay;
 	/**
 	 * 用户id
 	 */
@@ -52,34 +76,68 @@ public class IMicroclassCachedImpl implements IMicroclassCached {
 	public List<Study> findUser(Study study) {
 		return null;
 	}
-	public String getUserid() {
-		return userid;
+	public String getUserid(String sourceOfCertification) {
+		String string = "";
+		if("C".equals(sourceOfCertification)){
+			string = userid;
+		}else if("Z".equals(sourceOfCertification)){
+			string = useridAlipay;
+		}else {
+			string = userid;
+		}
+		return string;
 	}
-	public void setUserid(String userid) {
-		this.userid = userid;
+
+
+	public String getUserpwd(String sourceOfCertification) {
+		String string = "";
+		if("C".equals(sourceOfCertification)){
+			string = userpwd;
+		}else if("Z".equals(sourceOfCertification)){
+			string = userpwdAlipay;
+		}else {
+			string = userpwd;
+		}
+		return string;
 	}
-	public String getUserpwd() {
-		return userpwd;
+
+
+	public String getUrl(String sourceOfCertification) {
+		String string = "";
+		if("C".equals(sourceOfCertification)){
+			string = url;
+		}else if("Z".equals(sourceOfCertification)){
+			string = urlAlipay;
+		}else {
+			string = url;
+		}
+		return string;
 	}
-	public void setUserpwd(String userpwd) {
-		this.userpwd = userpwd;
+
+
+	public String getMethod(String sourceOfCertification) {
+		String string = "";
+		if("C".equals(sourceOfCertification)){
+			string = method;
+		}else  if("Z".equals(sourceOfCertification)){
+			string = methodAlipay;
+		}else {
+			string = method;
+		}
+		return string;
 	}
-	public String getUrl() {
-		return url;
+
+
+	public String getKey(String sourceOfCertification) {
+		String string = "";
+		if("C".equals(sourceOfCertification)){
+			string = key;
+		}else if("Z".equals(sourceOfCertification)){
+			string = keyAlipay;
+		}else {
+			string = key;
+		}
+		return string;
 	}
-	public void setUrl(String url) {
-		this.url = url;
-	}
-	public String getMethod() {
-		return method;
-	}
-	public void setMethod(String method) {
-		this.method = method;
-	}
-	public String getKey() {
-		return key;
-	}
-	public void setKey(String key) {
-		this.key = key;
-	}
+	
 }

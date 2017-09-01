@@ -51,8 +51,8 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 				+ "<sjhm>"+s.getMobilephone()+"</sjhm><ip>"+s.getIpAddress()+"</ip><yhly>"+s.getUserSource()+"</yhly></head></request>";
 		
 			String interfaceNumber = s.getInterfaceId();  //获取取题接口编号
-			JSONObject respStr =WebServiceClient.getInstance().requestWebService(iMicroclassCached.getUrl(), iMicroclassCached.getMethod(), 
-					interfaceNumber,xml,iMicroclassCached.getUserid(),iMicroclassCached.getUserpwd(),iMicroclassCached.getKey());
+			JSONObject respStr =WebServiceClient.getInstance().requestWebService(iMicroclassCached.getUrl(s.getUserSource()), iMicroclassCached.getMethod(s.getUserSource()), 
+					interfaceNumber,xml,iMicroclassCached.getUserid(s.getUserSource()),iMicroclassCached.getUserpwd(s.getUserSource()),iMicroclassCached.getKey(s.getUserSource()));
 			logger.info(respStr.toJSONString());
 			JSONObject body=respStr.getJSONObject("body");
 			JSONObject head=respStr.getJSONObject("head");
@@ -102,8 +102,8 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 
 		String interfaceNumber = s.getInterfaceId();  //获取取题接口编号
 				
-			JSONObject respStr =WebServiceClient.getInstance().requestWebService(iMicroclassCached.getUrl(), iMicroclassCached.getMethod(), 
-					interfaceNumber,xml,iMicroclassCached.getUserid(),iMicroclassCached.getUserpwd(),iMicroclassCached.getKey());
+			JSONObject respStr =WebServiceClient.getInstance().requestWebService(iMicroclassCached.getUrl(s.getUserSource()), iMicroclassCached.getMethod(s.getUserSource()), 
+					interfaceNumber,xml,iMicroclassCached.getUserid(s.getUserSource()),iMicroclassCached.getUserpwd(s.getUserSource()),iMicroclassCached.getKey(s.getUserSource()));
 			logger.info(respStr.toJSONString());
 			
 			JSONObject body=respStr.getJSONObject("body");
@@ -198,8 +198,8 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 				+ "<dt_sj>"+s.getAnswerDateTime()+"</dt_sj><dt_da>"+s.getSubjectAnswer()+"</dt_da><jfzq_start>"+s.getScoreStartDate()+"</jfzq_start><jfzq_end>"+s.getScoreEndDate()+"</jfzq_end></head></request>";
 		
 			String interfaceNumber = s.getInterfaceId();  //获取取题接口编号
-			JSONObject respStr =WebServiceClient.getInstance().requestWebService(iMicroclassCached.getUrl(), iMicroclassCached.getMethod(), 
-					interfaceNumber,xx,iMicroclassCached.getUserid(),iMicroclassCached.getUserpwd(),iMicroclassCached.getKey());
+			JSONObject respStr =WebServiceClient.getInstance().requestWebService(iMicroclassCached.getUrl(s.getUserSource()), iMicroclassCached.getMethod(s.getUserSource()), 
+					interfaceNumber,xx,iMicroclassCached.getUserid(s.getUserSource()),iMicroclassCached.getUserpwd(s.getUserSource()),iMicroclassCached.getKey(s.getUserSource()));
 			logger.info(respStr.toJSONString());
 			JSONObject body=respStr.getJSONObject("body");
 			JSONObject head=respStr.getJSONObject("head");
@@ -258,8 +258,8 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 					+ "<sjhm>"+s.getMobilephone()+"</sjhm><ywlx>"+s.getServiceType()+"</ywlx><ip>"+s.getIpAddress()+"</ip><yhly>"+s.getUserSource()+"</yhly></head></request>";
 		}
 			String interfaceNumber = s.getInterfaceId();  //获取取题接口编号
-			JSONObject respStr =WebServiceClient.getInstance().requestWebService(iMicroclassCached.getUrl(), iMicroclassCached.getMethod(), 
-			interfaceNumber,xfxx,iMicroclassCached.getUserid(),iMicroclassCached.getUserpwd(),iMicroclassCached.getKey());
+			JSONObject respStr =WebServiceClient.getInstance().requestWebService(iMicroclassCached.getUrl(s.getUserSource()), iMicroclassCached.getMethod(s.getUserSource()), 
+			interfaceNumber,xfxx,iMicroclassCached.getUserid(s.getUserSource()),iMicroclassCached.getUserpwd(s.getUserSource()),iMicroclassCached.getKey(s.getUserSource()));
 			logger.info(respStr.toJSONString());
 			JSONObject body=respStr.getJSONObject("body"); //获取json中body
 			JSONObject head=respStr.getJSONObject("head"); //获取json中head
@@ -345,8 +345,8 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 		
 		String interfaceNumber = s.getInterfaceId();  //获取取题接口编号
 				
-			JSONObject respStr =WebServiceClient.getInstance().requestWebService(iMicroclassCached.getUrl(), iMicroclassCached.getMethod(), 
-					interfaceNumber,xml,iMicroclassCached.getUserid(),iMicroclassCached.getUserpwd(),iMicroclassCached.getKey());
+			JSONObject respStr =WebServiceClient.getInstance().requestWebService(iMicroclassCached.getUrl(s.getUserSource()), iMicroclassCached.getMethod(s.getUserSource()), 
+					interfaceNumber,xml,iMicroclassCached.getUserid(s.getUserSource()),iMicroclassCached.getUserpwd(s.getUserSource()),iMicroclassCached.getKey(s.getUserSource()));
 			logger.info(respStr.toString());
 			JSONObject body=respStr.getJSONObject("body");
 			JSONObject head=respStr.getJSONObject("head");
@@ -438,8 +438,8 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 				+ "<dt_da>"+s.getSubjectAnswer()+"</dt_da></head></request>";
 		String interfaceNumber = s.getInterfaceId();  //获取取题接口编号
 				
-			JSONObject respStr =WebServiceClient.getInstance().requestWebService(iMicroclassCached.getUrl(), iMicroclassCached.getMethod(), 
-					interfaceNumber,xml,iMicroclassCached.getUserid(),iMicroclassCached.getUserpwd(),iMicroclassCached.getKey());
+			JSONObject respStr =WebServiceClient.getInstance().requestWebService(iMicroclassCached.getUrl(s.getUserSource()), iMicroclassCached.getMethod(s.getUserSource()), 
+					interfaceNumber,xml,iMicroclassCached.getUserid(s.getUserSource()),iMicroclassCached.getUserpwd(s.getUserSource()),iMicroclassCached.getKey(s.getUserSource()));
 			logger.info(respStr.toJSONString());
 			JSONObject body=respStr.getJSONObject("body");
 			JSONObject head=respStr.getJSONObject("head");
@@ -487,8 +487,8 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 				+ "<ywlx>"+s.getServiceType()+"</ywlx><jdsbh>"+s.getDecisionId()+"</jdsbh><ip>"+s.getIpAddress()+"</ip><yhly>"+s.getUserSource()+"</yhly></head></request>";
 		
 			String interfaceNumber = s.getInterfaceId();  //获取取题接口编号
-			JSONObject respStr =WebServiceClient.getInstance().requestWebService(iMicroclassCached.getUrl(), iMicroclassCached.getMethod(), 
-					interfaceNumber,xml,iMicroclassCached.getUserid(),iMicroclassCached.getUserpwd(),iMicroclassCached.getKey());
+			JSONObject respStr =WebServiceClient.getInstance().requestWebService(iMicroclassCached.getUrl(s.getUserSource()), iMicroclassCached.getMethod(s.getUserSource()), 
+					interfaceNumber,xml,iMicroclassCached.getUserid(s.getUserSource()),iMicroclassCached.getUserpwd(s.getUserSource()),iMicroclassCached.getKey(s.getUserSource()));
 			logger.info(respStr.toJSONString());
 			JSONObject body=respStr.getJSONObject("body");
 			JSONObject head=respStr.getJSONObject("head");
@@ -578,8 +578,8 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 		
 		String interfaceNumber = s.getInterfaceId();  //获取取题接口编号
 			
-			JSONObject respStr =WebServiceClient.getInstance().requestWebService(iMicroclassCached.getUrl(), iMicroclassCached.getMethod(), 
-					interfaceNumber,xml,iMicroclassCached.getUserid(),iMicroclassCached.getUserpwd(),iMicroclassCached.getKey());
+			JSONObject respStr =WebServiceClient.getInstance().requestWebService(iMicroclassCached.getUrl(s.getUserSource()), iMicroclassCached.getMethod(s.getUserSource()), 
+					interfaceNumber,xml,iMicroclassCached.getUserid(s.getUserSource()),iMicroclassCached.getUserpwd(s.getUserSource()),iMicroclassCached.getKey(s.getUserSource()));
 			logger.info(respStr.toJSONString());
 			JSONObject body=respStr.getJSONObject("body");
 			JSONObject head=respStr.getJSONObject("head");
