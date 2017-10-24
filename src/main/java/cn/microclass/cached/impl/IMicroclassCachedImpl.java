@@ -42,6 +42,31 @@ public class IMicroclassCachedImpl implements IMicroclassCached {
      */
     @Value("${keyAlipay}")
     private String keyAlipay;
+    /**
+	 * 用户id
+	 */
+	@Value("${useridApp}")
+    private String useridApp;
+	/**
+	 * 用户密码
+	 */
+    @Value("${userpwdApp}")
+    private String userpwdApp;
+    /**
+     * 请求地址
+     */
+    @Value("${urlApp}")
+    private String urlApp;
+    /**
+     * 方法
+     */
+    @Value("${methodApp}")
+    private String methodApp;
+    /**
+     * 秘钥
+     */
+    @Value("${keyApp}")
+    private String keyApp;
 	/**
 	 * 用户id
 	 */
@@ -82,6 +107,8 @@ public class IMicroclassCachedImpl implements IMicroclassCached {
 			string = userid;
 		}else if("Z".equals(sourceOfCertification)){
 			string = useridAlipay;
+		}else if("A".equals(sourceOfCertification)){
+			string = useridApp;
 		}else {
 			string = userid;
 		}
@@ -95,6 +122,8 @@ public class IMicroclassCachedImpl implements IMicroclassCached {
 			string = userpwd;
 		}else if("Z".equals(sourceOfCertification)){
 			string = userpwdAlipay;
+		}else if("A".equals(sourceOfCertification)){
+			string = userpwdApp;
 		}else {
 			string = userpwd;
 		}
@@ -108,12 +137,13 @@ public class IMicroclassCachedImpl implements IMicroclassCached {
 			string = url;
 		}else if("Z".equals(sourceOfCertification)){
 			string = urlAlipay;
+		}else if("A".equals(sourceOfCertification)){
+			string = urlApp;
 		}else {
 			string = url;
 		}
 		return string;
 	}
-
 
 	public String getMethod(String sourceOfCertification) {
 		String string = "";
@@ -121,6 +151,8 @@ public class IMicroclassCachedImpl implements IMicroclassCached {
 			string = method;
 		}else  if("Z".equals(sourceOfCertification)){
 			string = methodAlipay;
+		}else  if("A".equals(sourceOfCertification)){
+			string = methodApp;
 		}else {
 			string = method;
 		}
@@ -134,10 +166,28 @@ public class IMicroclassCachedImpl implements IMicroclassCached {
 			string = key;
 		}else if("Z".equals(sourceOfCertification)){
 			string = keyAlipay;
+		}else if("A".equals(sourceOfCertification)){
+			string = keyApp;
 		}else {
 			string = key;
 		}
 		return string;
+	}
+
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+	public void setUserpwd(String userpwd) {
+		this.userpwd = userpwd;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	public void setMethod(String method) {
+		this.method = method;
+	}
+	public void setKey(String key) {
+		this.key = key;
 	}
 	
 }

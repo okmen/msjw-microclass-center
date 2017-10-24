@@ -49,7 +49,7 @@ public class TestAccountService {
 		s.setIdentityCard("431022199612250036");
 		s.setMobilephone("17708404197");
 		s.setIpAddress("123.56.180.216");
-		s.setUserSource("C");
+		s.setUserSource("A");
 		List<BaseBean>list= microclassService.xfStudyQuery(s);
 		for(BaseBean b:list){
 			System.out.println(b.getCode());
