@@ -8,4 +8,6 @@ public interface ICacheKey {
 	public static String USER_INFO_REDIS_KEY = cachePrefix + "userInfo_";
 	public static String USER_REDIS_KEY = cachePrefix + "user_";
 	public static String USER_WECHAT_INFO_REDIS_KEY = cachePrefix + "wechat_";
+	
+	public static String APP_NEWEST_VERSION = "APP_NEWEST_VERSION_";
 }

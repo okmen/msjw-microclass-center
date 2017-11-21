@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.microclass.dao.mapper.AppVersionMapper">
+
+    <resultMap type="cn.microclass.bean.AppVersion" id="appVersionInfo">
+		<result property="id" column="id" />
+		<result property="system" column="system" />
+		<result property="version" column="version" />
+		<result property="forceUpdate" column="force_update" />
+		<result property="url" column="url" />
+		<result property="createTime" column="create_time" />
+		<result property="description" column="description" />
+	</resultMap>
+
+	<sql id="sql4NewestAppVersion">
+		`id`, `system`, `version`, `force_update`, `url`, `create_time`, `description`
+	</sql>
+	
+	<!-- 根据app系统获取对应最新版本 -->
+	<select id="queryNewestAppVersion" resultMap="appVersionInfo" >
+		SELECT
+			<include refid="sql4NewestAppVersion"></include>
+		FROM
+			`app_version`
+		WHERE
+			`system` = #{system}
+		ORDER BY create_time DESC
+		LIMIT 0,1;
+	</select>
+	
+</mapper>

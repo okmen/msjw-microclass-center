@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import cn.microclass.bean.AppVersion;
 import cn.microclass.bean.DeviceBean;
 import cn.microclass.bean.Token;
 import cn.microclass.bean.UserOpenidBean;
@@ -35,7 +36,15 @@ public class TestAccountService {
     @Qualifier("microclassService")
     private IMicroclassService microclassService;
     
-	
+    /**
+     * 获取最新app版本
+     * @throws Exception
+     */
+	@Test
+	public void testqueryNewestAppVersion() throws Exception{
+		AppVersion appVersion = microclassService.queryNewestAppVersion("Android");
+		System.out.println(appVersion);
+	}
  
 	/**
 	 * 消分业务相关查询

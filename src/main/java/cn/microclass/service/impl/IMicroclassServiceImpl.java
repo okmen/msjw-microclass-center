@@ -19,11 +19,13 @@ import com.alibaba.dubbo.container.Container;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
+import cn.microclass.bean.AppVersion;
 import cn.microclass.bean.WechatUserInfoBean;
 import cn.microclass.bean.studyclassroom.Answeroptions;
 import cn.microclass.bean.studyclassroom.Study;
 import cn.microclass.bean.studyclassroom.StudyRecord;
 import cn.microclass.cached.impl.IMicroclassCachedImpl;
+import cn.microclass.dao.IAppVersionDao;
 import cn.microclass.service.IMicroclassService;
 import cn.sdk.bean.BaseBean;
 import cn.sdk.util.StringUtil;
@@ -37,6 +39,8 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 	
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 	
+	@Autowired
+	private IAppVersionDao appVersionDao;
 	
 	/**
 	 * 消分业务相关信息  接口 exam003
@@ -605,6 +609,24 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 			throw e;
 		}
 		return list;
+	}
+
+	@Override
+	public AppVersion queryNewestAppVersion(String system) {
+		AppVersion appVersion = null;
+		try {
+			appVersion = iMicroclassCached.getAppVersion(system);
+			if(appVersion == null){
+				logger.info("【app】从数据库中获取app版本，参数system = " + system);
+				appVersion = appVersionDao.queryNewestAppVersion(system);
+				iMicroclassCached.setAppVersion(system, appVersion);
+			}
+			logger.info("【app】获取app版本结果，appVersion = " + appVersion);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return appVersion;
 	}
 	
 

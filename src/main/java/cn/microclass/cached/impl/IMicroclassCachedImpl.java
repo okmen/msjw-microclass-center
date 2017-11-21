@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import cn.microclass.bean.AppVersion;
 import cn.microclass.bean.studyclassroom.Study;
+import cn.microclass.cached.ICacheKey;
 import cn.microclass.cached.IMicroclassCached;
 import cn.sdk.cache.ICacheManger;
 
@@ -188,6 +190,14 @@ public class IMicroclassCachedImpl implements IMicroclassCached {
 	}
 	public void setKey(String key) {
 		this.key = key;
+	}
+	@Override
+	public void setAppVersion(String system, AppVersion appVersion) {
+		objectcacheManger.set(ICacheKey.APP_NEWEST_VERSION + system, appVersion, ICacheKey.exprieTime);
+	}
+	@Override
+	public AppVersion getAppVersion(String system) {
+		return (AppVersion) objectcacheManger.get(ICacheKey.APP_NEWEST_VERSION + system);
 	}
 	
 }
