@@ -93,7 +93,8 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 		List<Answeroptions>anserList=new ArrayList<>();
 		try {
 		String xml ="";
-		if(s.getClassroomId().equals("1")||s.getClassroomId().equals("2")||s.getClassroomId().equals("3")){
+		if("1".equals(s.getClassroomId())||"2".equals(s.getClassroomId())||"3".equals(s.getClassroomId())){
+//		if(s.getClassroomId().equals("1")||s.getClassroomId().equals("2")||s.getClassroomId().equals("3")){
 			
 		 xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?><request><head><sfzmhm>"+s.getIdentityCard()+"</sfzmhm>"
 				+ "<sjhm>"+s.getMobilephone()+"</sjhm><ip>"+s.getIpAddress()+"</ip><yhly>"+s.getUserSource()+"</yhly></head></request>";
@@ -251,7 +252,8 @@ public class IMicroclassServiceImpl implements IMicroclassService {
 		List<StudyRecord>studyrecordList=new ArrayList<>();
 		try {
 		String xfxx="";
-		if(s.getClassroomId().equals("1")||s.getClassroomId().equals("2")||s.getClassroomId().equals("3")){ 
+//		if(s.getClassroomId().equals("1")||s.getClassroomId().equals("2")||s.getClassroomId().equals("3")){
+		if("1".equals(s.getClassroomId())||"2".equals(s.getClassroomId())||"3".equals(s.getClassroomId())){
 			xfxx="<?xml version=\"1.0\" encoding=\"utf-8\"?>"
 					+ "<request><head><sfzmhm>"+s.getIdentityCard()+"</sfzmhm>"
 					+ "<sjhm>"+s.getMobilephone()+"</sjhm><ip>"+s.getIpAddress()+"</ip><yhly>"+s.getUserSource()+"</yhly></head></request>";
